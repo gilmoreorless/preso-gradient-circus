@@ -1,0 +1,61 @@
+body {
+  font-family: Menlo;
+  display: flex;
+  flex-wrap: wrap;
+}
+.play {
+  border: 1px dashed #999;
+  margin: 1em;
+  padding: 0.5em;
+}
+.play > span {
+  border: 1px solid #330;
+  display: block;
+  height: 200px;
+  margin-top: 1em;
+  width: 200px;
+}
+
+.layers {
+  background-image: linear-gradient(90deg, red 45%, transparent 50%),     linear-gradient(180deg, green 45%, transparent 50%),     linear-gradient(270deg, blue 45%, transparent 50%);
+}
+
+.logo, .js-logo {
+/*   opacity: 0.5; */
+  font-size: 1px;
+  background-color: #D9542B;
+  background-repeat: no-repeat;
+}
+.logo {
+  background-image:
+    /* Top point */
+/*     linear-gradient(71deg, transparent 8em, blue 8em), */
+/*     linear-gradient(109deg, transparent 8em, lime 8em), */
+    /* Body */
+/*     linear-gradient(to bottom, lime 2em, transparent 2em, transparent 20em, lime 20em) */
+  ;
+  background-size:
+    /* Top point */
+    10em 24em,
+    17em 24em,
+    /* Body */
+    37em 61em
+  ;
+  background-position:
+    /* Top point */
+    101em 0,
+    92em 0,
+    /* Body */
+    82em 75em
+  ;
+}
+
+.logo-example {
+  background-image: url(logo.jpg);
+  background-position: 50% 50%;
+  opacity: 0.4;
+  position: absolute;
+  transform: translateY(-218px);
+  z-index: -1;
+}
+
