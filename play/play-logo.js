@@ -269,9 +269,6 @@ var doStuff = (function () {
       on = !on;
     });
     images.push(imageType + '(' + image.join(', ') + ')');
-    if (imageType === 'radial-gradient') {
-      console.log(images.slice(-1)[0])
-    }
   });
 
   elem.style.backgroundSize = sizes.join(', ');
