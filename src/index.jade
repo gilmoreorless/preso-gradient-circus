@@ -1,0 +1,170 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Gradient Circus
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section(data-bespoke-hash='intro')
+        h2 Who’s this bozo? [IMG]
+        ul
+          li <a href="https://twitter.com/iamnotyourbroom">@iamnotyourbroom</a>
+          li <a href="https://shoehornwithteeth.com/">shoehornwithteeth.com</a>
+
+      section
+        img(src='IF I RAN THE CIRCUS')
+
+      section(data-bespoke-state='title')
+        h1 Gradient Circus
+
+      section
+        h2 Types of gradients
+        ul.gradient-gallery
+          li.linear
+            span.example
+            code linear-gradient
+          li.radial
+            span.example
+            code radial-gradient
+          li.repeating-linear
+            span.example
+            code repeating-linear-gradient
+          li.repeating-radial
+            span.example
+            code repeating-radial-gradient
+
+      section
+        h2 Support
+        a(href='http://caniuse.com/#feat=css-gradients') No prefixes needed!
+        img(src='SCREENSHOT')
+
+
+      // ACT I
+
+      section(data-bespoke-state='title')
+        h1 Act I
+        h2 Tips and tricks
+
+      section
+        h2 Patterns
+        [IMG]
+
+      section
+        h2 Pictures
+        p A single div
+
+      section
+        h2 Debugging
+        p Gradient inspector
+
+      section(data-bespoke-state='grey-area')
+        h2 Animation
+        p Bit of a grey area
+
+      section
+        h2 Future
+        p Conic gradients
+        p Something something Polyfill
+
+
+      // ACT II
+
+      section(data-bespoke-state='title')
+        h1 Act II
+        h2 Linear gradient angles
+
+      section
+        [IMG FROM PATRICK BROSSET'S ARTICLE]
+
+      section
+        h2 CoCodePen the Clown
+        video(src='SCREENCAST OF USING THE DEMO')
+
+
+      // ACT III
+
+      section(data-bespoke-state='title')
+        h1 Act III
+        h2 Background image layering
+
+      section
+        h2 Images from the top, then colour
+        div.single-bullet
+          div [DEMO 1]
+        div.single-bullet
+          div [DEMO 2]
+
+
+      // ACT IV
+
+      section(data-bespoke-state='title')
+        h1 Act IV
+        h2 Colour calculations
+
+      section.demo-colour-calcs(data-code-steps)
+        h2 A basic example
+        .example(style='background:linear-gradient(to right, hsl(220, 90%, 50%), hsl(0, 90%, 60%));')
+          .marker(data-code-step=4)
+        .code-steps
+          .code-steps-code
+            pre.language-(data-code-step=1)
+              code.language-.
+                linear-gradient(
+                  to right,
+                  <span style="color: hsl(220, 90%, 50%);">hsl(220, 90%, 50%)</span>,
+                  <span style="color: hsl(0, 90%, 60%);">hsl(0, 90%, 60%)</span>
+                </span>);
+            pre.language-(data-code-step=2)
+              code.language-.
+                linear-gradient(
+                  to right,
+                  <span style="color: rgba(13, 89, 242, 1);">rgba(13, 89, 242, 1)</span>,
+                  <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61, 61, 1)</span>
+                </span>);
+            pre.language-(data-code-step=3)
+              code.language-.
+                linear-gradient(
+                  to right,
+                  <span style="color: rgba(13, 89, 242, 1);">rgba( 13, 89, 242, 1)</span>,
+                <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ */</span>
+                  <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61,  61, 1)</span>
+                </span>);
+            pre.language-(data-code-step=4)
+              code.language-.
+                linear-gradient(
+                  to right,
+                  <span style="color: rgba(13, 89, 242, 1); ">rgba( 13, 89, 242, 1)</span>,
+                <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ </span>
+                  <span style="color: rgba(129, 75, 152, 1);">rgba(129, 75, 152, 1)</span>
+                <span style="color: #bbb;">        ↓   ↓    ↓   ↓ */</span>
+                  <span style="color: rgba(245, 61, 61, 1); ">rgba(245, 61,  61, 1)</span>
+                </span>);
+          ol.code-steps-info
+            li(data-code-step=1) A simple gradient
+            li(data-code-step=2) Convert to RGBA
+            li(data-code-step=3) Interpolate each channel separately
+            li(data-code-step=4) Example at 50%
+
+      section
+        h2 Transparency
+
+      section
+        h2 Premultiplied alpha
+
+
+      // FINALE
+      
+      section(data-bespoke-state='title')
+        h1 Grand Finale
+
+      section
+        p LOGO
+
+
+    script(src='build/build.js')

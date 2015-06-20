@@ -118,16 +118,18 @@ var bgImageShowcase = (function () {
     var parsed = parseImages(bgImage);
     var positions = bgPos.split(',').map(trim);
     var sizes = bgSize.split(',').map(trim);
+    var repeat = bgRepeat.split(',').map(trim);
 
     for (var i = 0, ii = parsed.length; i < ii; i++) {
       var iPos = i % positions.length;
       var iSize = i % sizes.length;
+      var iRepeat = i % repeat.length;
       images.push({
         // image: GradientParser.stringify(parsed[i]),
         image: parsed[i],
         position: positions[iPos],
         size: sizes[iSize],
-        repeat: bgRepeat
+        repeat: repeat[iRepeat]
       });
     }
     if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {

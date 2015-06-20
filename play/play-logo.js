@@ -69,12 +69,12 @@ var doStuff = (function () {
   var headJoinTopLeftGradient = getBoxBisector(headJoinTopSize, 1, 3);
   var headJoinTopRightGradient = getBoxBisector(headJoinTopSize, 2, 4);
   tmp = headJoinTopLeftGradient.stops[0];
-  var headJoinTopStops = [tmp - 1.5, tmp + 1.5];
+  var headJoinTopStops = [tmp - 1, tmp + 1];
   headJoinTopStops.feather = true;
   var headJoinSideLeftGradient = getBoxBisector(headJoinSideSize, 1, 3);
   var headJoinSideRightGradient = getBoxBisector(headJoinSideSize, 2, 4);
   tmp = headJoinSideLeftGradient.stops[0];
-  var headJoinSideStops = [tmp - 1.5, tmp + 1.5];
+  var headJoinSideStops = [tmp - 1, tmp + 1];
   headJoinSideStops.feather = true;
 
   var topPointSize = [9, 24];
