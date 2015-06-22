@@ -8,13 +8,10 @@ module.exports = function() {
       activeStepIndex,
 
       bullets = deck.slides.map(function(slide) {
-        if (!slide.hasAttribute('data-code-steps')) {
-          return [];
-        }
         var steps = [];
-        var stepNodes = [].slice.call(slide.querySelectorAll('[data-code-step]'), 0);
+        var stepNodes = [].slice.call(slide.querySelectorAll('[data-linked-step]'), 0);
         stepNodes.forEach(function (step) {
-          var stepNum = step.getAttribute('data-code-step');
+          var stepNum = step.getAttribute('data-linked-step');
           if (stepNum) {
             stepNum = parseInt(stepNum, 10) || 0;
             var substeps = steps[stepNum];
@@ -24,10 +21,18 @@ module.exports = function() {
             substeps.parts.push(step);
           }
         });
-          // Re-index the possibly sparse array
-        return steps.filter(function (s) {
+        if (!steps.length) {
+          return steps;
+        }
+        // Re-index the possibly sparse array
+        steps = steps.filter(function (s) {
           return s;
         });
+        // Insert a step "0" if needed (to hide first steps)
+        if (steps[0].stepNum > 0) {
+          steps.unshift({stepNum: 0, parts: []});
+        }
+        return steps;
       }),
 
       next = function() {
@@ -59,20 +64,20 @@ module.exports = function() {
         bullets.forEach(function(slide, s) {
           slide.forEach(function(step, st) {
             step.parts.forEach(function(part) {
-              part.classList.add('code-steps-step');
+              part.classList.add('linked-step');
 
               if (s < slideIndex || s === slideIndex && st <= stepIndex) {
-                part.classList.add('code-steps-step-active');
-                part.classList.remove('code-steps-step-inactive');
+                part.classList.add('linked-step-active');
+                part.classList.remove('linked-step-inactive');
               } else {
-                part.classList.add('code-steps-step-inactive');
-                part.classList.remove('code-steps-step-active');
+                part.classList.add('linked-step-inactive');
+                part.classList.remove('linked-step-active');
               }
 
               if (s === slideIndex && st === stepIndex) {
-                part.classList.add('code-steps-step-current');
+                part.classList.add('linked-step-current');
               } else {
-                part.classList.remove('code-steps-step-current');
+                part.classList.remove('linked-step-current');
               }
             });
           });

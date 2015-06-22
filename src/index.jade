@@ -17,8 +17,8 @@ html
           li <a href="https://twitter.com/iamnotyourbroom">@iamnotyourbroom</a>
           li <a href="https://shoehornwithteeth.com/">shoehornwithteeth.com</a>
 
-      section
-        img(src='IF I RAN THE CIRCUS')
+      section.middle
+        img(src='images/If-I-ran-the-circus.jpg', height='70%')
 
       section(data-bespoke-state='title')
         h1 Gradient Circus
@@ -95,9 +95,9 @@ html
 
       section
         h2 Images from the top, then colour
-        div.single-bullet
+        div.single-bullet(data-linked-step=0)
           div [DEMO 1]
-        div.single-bullet
+        div.single-bullet(data-linked-step=1)
           div [DEMO 2]
 
 
@@ -107,27 +107,27 @@ html
         h1 Act IV
         h2 Colour calculations
 
-      section.demo-colour-calcs(data-code-steps)
+      section.demo-colour-calcs
         h2 A basic example
         .example(style='background:linear-gradient(to right, hsl(220, 90%, 50%), hsl(0, 90%, 60%));')
-          .marker(data-code-step=4)
+          .marker(data-linked-step=4, style="color: rgba(129, 75, 152, 1)")
         .code-steps
           .code-steps-code
-            pre.language-(data-code-step=1)
+            pre.language-(data-linked-step=1)
               code.language-.
                 linear-gradient(
                   to right,
                   <span style="color: hsl(220, 90%, 50%);">hsl(220, 90%, 50%)</span>,
                   <span style="color: hsl(0, 90%, 60%);">hsl(0, 90%, 60%)</span>
                 </span>);
-            pre.language-(data-code-step=2)
+            pre.language-(data-linked-step=2)
               code.language-.
                 linear-gradient(
                   to right,
                   <span style="color: rgba(13, 89, 242, 1);">rgba(13, 89, 242, 1)</span>,
                   <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61, 61, 1)</span>
                 </span>);
-            pre.language-(data-code-step=3)
+            pre.language-(data-linked-step=3)
               code.language-.
                 linear-gradient(
                   to right,
@@ -135,7 +135,7 @@ html
                 <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ */</span>
                   <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61,  61, 1)</span>
                 </span>);
-            pre.language-(data-code-step=4)
+            pre.language-(data-linked-step=4)
               code.language-.
                 linear-gradient(
                   to right,
@@ -146,16 +146,47 @@ html
                   <span style="color: rgba(245, 61, 61, 1); ">rgba(245, 61,  61, 1)</span>
                 </span>);
           ol.code-steps-info
-            li(data-code-step=1) A simple gradient
-            li(data-code-step=2) Convert to RGBA
-            li(data-code-step=3) Interpolate each channel separately
-            li(data-code-step=4) Example at 50%
+            li(data-linked-step=1) A simple gradient
+            li(data-linked-step=2) Convert to RGBA
+            li(data-linked-step=3) Interpolate each channel separately
+            li(data-linked-step=4) Example at 50%
 
-      section
+      section.demo-transparency
         h2 Transparency
+        p
+          code transparent == rgba(0, 0, 0, 0)
+          pre.language-(data-linked-step=3)
+            code.language-.
+              linear-gradient(red, rgba(255,0,0,0) 50%,
+                              rgba(0,0,255,0) 50%, blue);
+          pre.language-.hide-when-previous-visible
+            code.language-.
+              linear-gradient(red, transparent, blue);
+
+        .trans-demo
+          .trans-list
+            .wrapper
+              h3(data-linked-step=1) Old spec
+              h4(data-linked-step=1) Normal colour
+              ul(data-linked-step=2)
+                li Safari
+                li Canvas
+                li SVG
+          .example
+            include premul-gradient-svg
+          .example
+            - var usePremul = true
+            include premul-gradient-svg
+          .trans-list
+            h3(data-linked-step=1) New spec
+            h4(data-linked-step=1) Premultiplied alpha
+            ul(data-linked-step=2)
+              li Chrome
+              li Firefox
+              li IE / Edge
 
       section
-        h2 Premultiplied alpha
+        h2 Premultiplied alpha, what?
 
 
       // FINALE

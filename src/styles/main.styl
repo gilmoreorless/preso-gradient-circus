@@ -1,11 +1,4 @@
-// New to Stylus? Check out http://learnboost.github.io/stylus
-// Use modern CSS thanks to Autoprefixer: https://github.com/ai/autoprefixer
-
-// Import CSS from "node_modules" and "bower_components"
-// thanks to Stylus' "import css" and "paths" options
-
 @import 'prism/themes/prism-twilight.css'
-// Check out "bower_components/prism/themes/" for available themes
 
 
 // ========== THEME ==========
@@ -19,7 +12,7 @@ $sydcss = #D9542B
 $headline = "Britannic Bold"
 $serif = didot, times new roman, serif
 $sans-serif = gill sans, helvetica, arial, arial, sans-serif
-$monospace = prestige elite std, consolas, courier new, monospace
+$monospace = consolas, courier new, monospace
 $emdash = '\2014'
 
 $gradient-background = radial-gradient(farthest-corner, $background, $sydcss 110%)
@@ -60,6 +53,8 @@ html
   // text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.75)
   width: 768px
   height: 576px
+  // width: 1024px
+  // height: 768px
   position: absolute
   top: 50%
   left: 50%
@@ -67,9 +62,22 @@ html
   margin-top: -(@height / 2)
   display: flex
   flex-direction: column
-  justify-content: center
   align-items: center
   z-index: 1
+
+  &.middle
+    justify-content: center
+
+.bespoke-parent.title
+  // background: conic-gradient
+
+  .bespoke-slide
+    justify-content: center
+
+.bespoke-parent.grey-area
+  background: #aaa
+
+
 
 // .bespoke-active
 //   transition-delay: .3s
@@ -105,11 +113,9 @@ html
   height: 100%
   transition: width .5s ease
 
-.bespoke-parent.grey-area
-  background: #aaa
-
 .bespoke-bullet-inactive,
-.bespoke-bullet.single-bullet.bespoke-bullet-active:not(.bespoke-bullet-current)
+.single-bullet.bespoke-bullet-active:not(.bespoke-bullet-current),
+.single-bullet.linked-step-active:not(.linked-step-current)
   display: none
 
 strong
@@ -137,10 +143,17 @@ h2
   font-size: 1.1em
   margin: 0.1em 0
 
+.bespoke-slide > h2:first-child
+  margin-top: 2em
+
 h3
-  font-style: normal
-  font-size: .6em
-  margin: 1.1em 0
+  font-size: 1em
+  font-weight: bold
+  margin: 0.5em 0
+
+h4
+  font-size: 0.8em
+  font-style: italic
 
 ul, ol
   padding: 0
@@ -149,13 +162,11 @@ ul, ol
 
 ul li
   // list-style-image: radial-gradient(farthest-side, green, red 70%, transparent 99%)
-  list-style: none
-  margin: .2em
+  // list-style: none
+  margin: .2em .2em .2em 1.75em
   font-style: normal
+  padding-left: 0
   // transform: translateX(-6px)
-  &:before
-    content: $emdash
-    margin-right: 4px
 
 ol li
   margin: .2em .2em .2em 2.2em
@@ -190,13 +201,62 @@ code
   position: relative
 
   .marker
-    content: '⬆︎'
     position: absolute
     width: 1em
     height: 1.4em
     left: 50%
     margin-left: -.5em
-    top: 80%
+    bottom: -1.2em
+    &:before
+      content: '⬆︎'
+      color: currentColor
+
+// DEMO: Colour calculations
+
+.demo-colour-calcs .example
+  height: 1.5em
+  margin-bottom: 1.2em
+  width: 75%
+
+// DEMO: Transparency
+
+.demo-transparency pre
+  font-size: .8em
+  padding: .75em
+
+.demo-transparency .linked-step-current + .hide-when-previous-visible
+  display: none
+
+.trans-demo
+  display: flex
+  margin-top: .5em
+  width: calc(100% - 2em)
+
+  .example
+    height: 7em
+    margin: .5em .25em
+    min-width: 0
+    width: 5em
+
+    svg
+      height: 100%
+      width: 100%
+
+.trans-list
+  flex-grow: 1
+  text-align: left
+  width: 20%
+  &:first-child .wrapper
+    float: right
+
+  h4
+    padding-left: 20px
+    padding-right: 20px
+
+  ul
+    margin-top: .5em
+
+// Code steps
 
 .code-steps
   display: flex
@@ -210,6 +270,6 @@ code
 .code-steps-code pre
   margin: 0
 
-.code-steps-step-inactive,
-.code-steps-code .code-steps-step-active:not(.code-steps-step-current)
+.linked-step-inactive,
+.code-steps-code .linked-step-active:not(.linked-step-current)
   display: none

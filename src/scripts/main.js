@@ -17,7 +17,7 @@ bespoke.from('article', [
   state(),
   keys(),
   touch(),
-  bullets('.bullet, .single-bullet'),
+  // bullets('.bullet, .single-bullet'),
   codeSteps(),
   backdrop(),
   scale(),
