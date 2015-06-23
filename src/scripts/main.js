@@ -19,6 +19,11 @@ var bespoke = require('bespoke'),
 // Custom plugins
 var linkedBullets = require('./plugin-linked-steps');
 
+// Grand finale
+var generateLogo = require('./generate-logo');
+var logoHolder = document.querySelector('.demo-logo .showcase-target');
+generateLogo(logoHolder);
+
 // Background image layering demos
 var bgImageShowcase = require('./bgimage-showcase');
 var showcasePlugin = function () {
@@ -38,7 +43,8 @@ var showcasePlugin = function () {
       if (target) {
         bgImageShowcase.inspect(target, {
           container: target.parentNode,
-          padding: 40
+          padding: 40,
+          startMode: target.getAttribute('data-showcase-start-mode')
         });
       }
     });

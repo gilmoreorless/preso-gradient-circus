@@ -111,10 +111,25 @@ html
             .showcase-container
               .showcase-target
 
-      section.demo-positioning
+      section.demo-positioning(data-bgimage-showcase)
         h2 Images from the top, then colour
-        div(data-bgimage-showcase)
-          | bg-size + bg-position
+        .code-steps
+          .code-steps-code
+            pre
+              code.language-css.
+                background-repeat:
+                  no-repeat;
+                background-size:
+                  60% 100%;
+                background-position:
+                  100% 0,
+                  0 0;
+                background-image:
+                  radial-gradient(...),
+                  radial-gradient(...);
+          .code-steps-info
+            .showcase-container
+              .showcase-target
 
       // ACT IV
 
@@ -209,8 +224,11 @@ html
       section(data-bespoke-state='title')
         h1 Grand Finale
 
-      section
-        p LOGO
-
+      section.demo-logo(data-bgimage-showcase)
+        .showcase-container
+          .showcase-target(data-showcase-start-mode='exploded')
+        h2 Thanks, SydCSS!
+        h4 @iamnotyourbroom
+        
 
     script(src='build/build.js')

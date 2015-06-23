@@ -248,6 +248,7 @@ code
     margin-top: 1em
 
 .showcase-target
+  background-repeat: no-repeat
   border: 2px solid #330
   display: block
   height: 200px
@@ -282,9 +283,18 @@ code
 
 .demo-layering .showcase-target
   background-color: skyblue
-  background-image: url(../images/image-demo-layering.png),
-                    linear-gradient(to top, olive, green 45%, rgba(255, 255, 255, 0.9) 45%, transparent 100%),
-                    radial-gradient(circle at 60% 40%, yellow 30%, transparent 35%)
+  background-image:
+    url(../images/image-demo-layering.png),
+    linear-gradient(to top, olive, green 45%, rgba(255, 255, 255, 0.9) 45%, transparent 100%),
+    radial-gradient(circle at 60% 40%, yellow 30%, transparent 35%)
+
+.demo-positioning .showcase-target
+  background-image:
+    radial-gradient(circle at 100% 0, transparent 20%, #26708E 21%),
+    radial-gradient(circle at 0 0, transparent 20%, #26708E 21%)
+  background-size: 60% 100%
+  background-position: 100% 0, 0 0;
+  background-repeat: no-repeat
 
 
 // DEMO: Colour calculations
@@ -339,3 +349,12 @@ code
 
   ul
     margin-top: .5em
+
+
+// DEMO: Logo
+
+.demo-logo .showcase-container
+  margin-top: 3em
+
+.demo-logo h4
+  margin-top: .5em
