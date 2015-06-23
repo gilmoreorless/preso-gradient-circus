@@ -2,6 +2,8 @@
   "name": "presentation-gradient-circus",
   "version": "0.0.0",
   "dependencies": {
-    "prism": "gh-pages"
+    "prism": "gh-pages",
+    "prefixfree": "git://github.com/LeaVerou/prefixfree.git#gh-pages",
+    "conic-gradient": "git://github.com/LeaVerou/conic-gradient.git#gh-pages"
   }
 }

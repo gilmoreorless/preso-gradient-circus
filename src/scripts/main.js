@@ -13,6 +13,7 @@ var bespoke = require('bespoke'),
   state = require('bespoke-state'),
   keys = require('bespoke-keys'),
   touch = require('bespoke-touch'),
+  backdrop = require('bespoke-backdrop'),
   scale = require('bespoke-scale'),
   hash = require('bespoke-hash');
 
@@ -66,12 +67,12 @@ bespoke.from('article', [
   touch(),
   linkedBullets(),
   showcasePlugin(),
+  backdrop(),
   scale(),
   hash()
 ]);
 
-// Prism syntax highlighting
-// This is actually loaded from "bower_components" thanks to
-// debowerify: https://github.com/eugeneware/debowerify
+// Various Lea Verou libraries loaded via bower_components
 require('prism');
-
+require('prefixfree');
+require('conic-gradient');

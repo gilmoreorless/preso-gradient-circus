@@ -68,19 +68,25 @@ html
   &.middle
     justify-content: center
 
-.bespoke-parent.title
-  // background: conic-gradient
+.bespoke-parent.title .bespoke-slide
+  justify-content: center
 
-  .bespoke-slide
-    justify-content: center
+.bespoke-backdrop.title.bespoke-backdrop-active
+  background: repeating-conic-gradient($background 0 7deg,
+                                       transparent 0 22deg,
+                                       $background 0 30deg)
+  transition: none
+  animation: spin 40s linear infinite
 
 .bespoke-parent.grey-area
   background: #aaa
 
+@keyframes spin
+  from
+    transform: scale(2) rotate(0turn)
+  to
+    transform: scale(2) rotate(1turn)
 
-
-// .bespoke-active
-//   transition-delay: .3s
 
 .bespoke-inactive
   opacity: 0
