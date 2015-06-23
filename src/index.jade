@@ -53,7 +53,7 @@ html
 
       section
         h2 Patterns
-        [IMG]
+        | [IMG]
 
       section
         h2 Pictures
@@ -80,7 +80,7 @@ html
         h2 Linear gradient angles
 
       section
-        [IMG FROM PATRICK BROSSET'S ARTICLE]
+        | [IMG FROM PATRICK BROSSET'S ARTICLE]
 
       section
         h2 CoCodePen the Clown
@@ -93,13 +93,28 @@ html
         h1 Act III
         h2 Background image layering
 
-      section
+      section.demo-layering(data-bgimage-showcase)
         h2 Images from the top, then colour
-        div.single-bullet(data-linked-step=0)
-          div [DEMO 1]
-        div.single-bullet(data-linked-step=1)
-          div [DEMO 2]
+        p Remember, gradients are just images
+        //- | bg colour + images + gradients
+        .code-steps
+          .code-steps-code
+            pre
+              code.language-css.
+                background-color:
+                  skyblue;
+                background-image:
+                  url(...),
+                  linear-gradient(...),
+                  radial-gradient(...);
+          .code-steps-info
+            .showcase-container
+              .showcase-target
 
+      section.demo-positioning
+        h2 Images from the top, then colour
+        div(data-bgimage-showcase)
+          | bg-size + bg-position
 
       // ACT IV
 
@@ -117,33 +132,33 @@ html
               code.language-.
                 linear-gradient(
                   to right,
-                  <span style="color: hsl(220, 90%, 50%);">hsl(220, 90%, 50%)</span>,
-                  <span style="color: hsl(0, 90%, 60%);">hsl(0, 90%, 60%)</span>
+                  <span data-code-colour>hsl(220, 90%, 50%)</span>,
+                  <span data-code-colour>hsl(0, 90%, 60%)</span>
                 </span>);
             pre.language-(data-linked-step=2)
               code.language-.
                 linear-gradient(
                   to right,
-                  <span style="color: rgba(13, 89, 242, 1);">rgba(13, 89, 242, 1)</span>,
-                  <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61, 61, 1)</span>
+                  <span data-code-colour>rgba(13, 89, 242, 1)</span>,
+                  <span data-code-colour>rgba(245, 61, 61, 1)</span>
                 </span>);
             pre.language-(data-linked-step=3)
               code.language-.
                 linear-gradient(
                   to right,
-                  <span style="color: rgba(13, 89, 242, 1);">rgba( 13, 89, 242, 1)</span>,
+                  <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
                 <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ */</span>
-                  <span style="color: rgba(245, 61, 61, 1);">rgba(245, 61,  61, 1)</span>
+                  <span data-code-colour>rgba(245, 61,  61, 1)</span>
                 </span>);
             pre.language-(data-linked-step=4)
               code.language-.
                 linear-gradient(
                   to right,
-                  <span style="color: rgba(13, 89, 242, 1); ">rgba( 13, 89, 242, 1)</span>,
+                  <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
                 <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ </span>
-                  <span style="color: rgba(129, 75, 152, 1);">rgba(129, 75, 152, 1)</span>
+                  <span data-code-colour>rgba(129, 75, 152, 1)</span>
                 <span style="color: #bbb;">        ↓   ↓    ↓   ↓ */</span>
-                  <span style="color: rgba(245, 61, 61, 1); ">rgba(245, 61,  61, 1)</span>
+                  <span data-code-colour>rgba(245, 61,  61, 1)</span>
                 </span>);
           ol.code-steps-info
             li(data-linked-step=1) A simple gradient

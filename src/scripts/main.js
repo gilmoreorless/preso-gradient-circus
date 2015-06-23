@@ -1,15 +1,56 @@
-// Require Node modules in the browser thanks to Browserify: http://browserify.org
+// Setup
+[].forEach.call(document.querySelectorAll('[data-code-colour]'), function (elem) {
+  var colour = elem.textContent.trim();
+  var preview = document.createElement('span');
+  preview.className = 'code-colour-preview';
+  preview.style.backgroundColor = colour;
+  elem.insertBefore(preview, elem.firstChild);
+});
+
+// Default bespoke plugins
 var bespoke = require('bespoke'),
   classes = require('bespoke-classes'),
   state = require('bespoke-state'),
   keys = require('bespoke-keys'),
   touch = require('bespoke-touch'),
-  bullets = require('bespoke-bullets'),
-  backdrop = require('bespoke-backdrop'),
   scale = require('bespoke-scale'),
   hash = require('bespoke-hash');
 
-var codeSteps = require('./plugin-code-steps');
+// Custom plugins
+var linkedBullets = require('./plugin-linked-steps');
+
+// Background image layering demos
+var bgImageShowcase = require('./bgimage-showcase');
+var showcasePlugin = function () {
+  return function (deck) {
+    var targets = deck.slides.map(function (slide) {
+      var hasShowcase = slide.hasAttribute('data-bgimage-showcase');
+      if (hasShowcase) {
+        var target = slide.querySelector('.showcase-target');
+        if (target) {
+          return target;
+        }
+      }
+    });
+
+    deck.on('activate', function (event) {
+      var target = targets[event.index];
+      if (target) {
+        bgImageShowcase.inspect(target, {
+          container: target.parentNode,
+          padding: 40
+        });
+      }
+    });
+
+    deck.on('deactivate', function (event) {
+      var target = targets[event.index];
+      if (target) {
+        bgImageShowcase.stop();
+      }
+    });
+  };
+};
 
 // Bespoke.js
 bespoke.from('article', [
@@ -17,9 +58,8 @@ bespoke.from('article', [
   state(),
   keys(),
   touch(),
-  // bullets('.bullet, .single-bullet'),
-  codeSteps(),
-  backdrop(),
+  linkedBullets(),
+  showcasePlugin(),
   scale(),
   hash()
 ]);

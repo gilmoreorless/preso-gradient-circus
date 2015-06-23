@@ -211,12 +211,96 @@ code
       content: '⬆︎'
       color: currentColor
 
+// Code steps
+
+.code-steps
+  display: flex
+  margin-top: .5em
+  width: calc(100% - 2em)
+
+.code-steps-code,
+.code-steps-info
+  width: 50%
+
+.code-steps-code pre
+  margin: 0
+
+.linked-step-inactive,
+.code-steps-code .linked-step-active:not(.linked-step-current)
+  display: none
+
+
+// DEMO: Background images
+
+.bespoke-slide[data-bgimage-showcase]
+  overflow: auto
+
+.showcase-container
+  // background: #bbb
+  // background: rgba(255, 255, 255, .4)
+  border-radius: .3em
+  box-sizing: border-box
+  height: 50%
+  text-align: center
+  width: 50%
+
+  .bespoke-slide > &
+    margin-top: 1em
+
+.showcase-target
+  border: 2px solid #330
+  display: block
+  height: 200px
+  margin: 0 auto
+  width: 200px
+
+  .bgimage-showcase-active &
+    display: none
+
+.bgimage-showcase-container
+  // background-color: rgba(255, 255, 255, .4)
+  // background-color: rgba(0, 0, 0, .4)
+  background-color: #aaa
+  border-radius: .5em
+  position: absolute
+  perspective: 10000px
+  perspective-origin: 0 100%
+  transition: height 1s
+
+.bgimage-showcase-layer
+  border: 1px solid #330
+  position: absolute
+  transition: all 1s
+
+.bgimage-showcase-mode-3d .bgimage-showcase-layer,
+.bgimage-showcase-mode-3d-expanded .bgimage-showcase-layer
+  border-width: 2px
+
+.code-steps-info .showcase-target
+  margin-left: calc(1em + 40px)
+  margin-top: 40px
+
+.demo-layering .showcase-target
+  background-color: skyblue
+  background-image: url(../images/image-demo-layering.png),
+                    linear-gradient(to top, olive, green 45%, rgba(255, 255, 255, 0.9) 45%, transparent 100%),
+                    radial-gradient(circle at 60% 40%, yellow 30%, transparent 35%)
+
+
 // DEMO: Colour calculations
 
 .demo-colour-calcs .example
   height: 1.5em
   margin-bottom: 1.2em
   width: 75%
+
+.code-colour-preview
+  display: inline-block
+  height: .8em
+  width: .8em
+  margin: 0 .35em 0 -1.35em
+  vertical-align: middle
+
 
 // DEMO: Transparency
 
@@ -255,21 +339,3 @@ code
 
   ul
     margin-top: .5em
-
-// Code steps
-
-.code-steps
-  display: flex
-  margin-top: .5em
-  width: calc(100% - 2em)
-
-.code-steps-code,
-.code-steps-info
-  width: 50%
-
-.code-steps-code pre
-  margin: 0
-
-.linked-step-inactive,
-.code-steps-code .linked-step-active:not(.linked-step-current)
-  display: none
