@@ -96,7 +96,6 @@ html
       section.demo-layering(data-bgimage-showcase)
         h2 Images from the top, then colour
         p Remember, gradients are just images
-        //- | bg colour + images + gradients
         .code-steps
           .code-steps-code
             pre
@@ -162,7 +161,7 @@ html
                 linear-gradient(
                   to right,
                   <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
-                <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ */</span>
+                <span class="code-comment">/*      ↓   ↓    ↓   ↓ */</span>
                   <span data-code-colour>rgba(245, 61,  61, 1)</span>
                 </span>);
             pre.language-(data-linked-step=4)
@@ -170,9 +169,9 @@ html
                 linear-gradient(
                   to right,
                   <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
-                <span style="color: #bbb;">/*      ↓   ↓    ↓   ↓ </span>
+                <span class="code-comment">/*      ↓   ↓    ↓   ↓ </span>
                   <span data-code-colour>rgba(129, 75, 152, 1)</span>
-                <span style="color: #bbb;">        ↓   ↓    ↓   ↓ */</span>
+                <span class="code-comment">        ↓   ↓    ↓   ↓ */</span>
                   <span data-code-colour>rgba(245, 61,  61, 1)</span>
                 </span>);
           ol.code-steps-info
@@ -209,14 +208,143 @@ html
             include premul-gradient-svg
           .trans-list
             h3(data-linked-step=1) New spec
-            h4(data-linked-step=1) Premultiplied alpha
+            h4(data-linked-step=1) Pre-multiplied alpha
             ul(data-linked-step=2)
               li Chrome
               li Firefox
               li IE / Edge
 
       section
-        h2 Premultiplied alpha, what?
+        h2 Pre-whatified what now?
+        p Pre-multiplied alpha &ndash; keeping <code>transparent</code> pretty
+        blockquote.single-bullet(data-linked-step=1)
+          p The formula for simple alpha compositing is
+          code co = Cs x αs + Cb x αb x (1 - αs)
+          p Where
+          ul
+            li <code>co</code>: the premultiplied pixel value after compositing
+            li <code>Cs</code>: the color value of the source graphic element being composited
+            li <code>αs</code>: the alpha value of the source graphic element being composited
+            li <code>Cb</code>: the color value of the backdrop
+            li <code>αb</code>: the alpha value of the backdrop
+          cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
+        h3.wtf(data-linked-step=2) Simple, right?
+
+      //- section
+      //-   h2 Let’s try again
+      //-   p Blending with a white background
+      //-   .blend-demo
+      //-     .blend-row
+      //-       .blend-text
+      //-         h3 Defined as
+      //-       .blend-text
+      //-       .blend-text
+      //-         h3 Displayed as
+      //-     .blend-row
+      //-       .blend-text
+      //-         code rgba(255, 0, 0, 1)
+      //-       .blend-example
+      //-         span(style='background-color:red')
+      //-       .blend-text
+      //-         code rgba(255, 0, 0, 1)
+      //-     .blend-row
+      //-       .blend-text
+      //-         code rgba(255, 0, 0, 0.5)
+      //-       .blend-example
+      //-         span(style='background-color:rgba(255, 0, 0, 0.5)')
+      //-       .blend-text
+      //-         code rgba(255, 127, 127, 1)
+      //-     .blend-row
+      //-       .blend-text
+      //-         code rgba(255, 0, 128, 0.75)
+      //-       .blend-example
+      //-         span(style='background-color:rgba(255, 0, 128, 0.75)')
+      //-       .blend-text
+      //-         code rgba(255, 63, 159, 1)
+
+      section.demo-blend(data-linked-indicator)
+        h2 Let’s try again
+        p.subtitle
+          span(data-linked-step=0) Blending partly-transparent red on a white background.
+          span(data-linked-step=1) 1. Multiply source by the alpha value.
+          span(data-linked-step=2) 2. Multiply background by the <strong>inverse</strong> source alpha value.
+          span(data-linked-step=3) 3. Add them together
+        .example
+          span
+        table
+          tr
+            th
+            th(colspan=2): code source<br>&nbsp;<span class="highlight" data-linked-step="1">&times; 0.6</span>
+            th(colspan=2): code + destination<br>&nbsp;<span class="highlight" data-linked-step="2">&times; 0.4</span>
+            th(colspan=2, data-linked-step=3): code = output<br><span class="highlight">&nbsp;</span>
+          tr.channel-red
+            td.channel-name R
+            td(data-type='source'): code
+            td(data-type='source'): .channel-meter: .channel-fill
+            td(data-type='dest'): code
+            td(data-type='dest'): .channel-meter: .channel-fill
+            td(data-type='output', data-linked-step=3): code
+            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+          tr.channel-green
+            td.channel-name G
+            td(data-type='source'): code
+            td(data-type='source'): .channel-meter: .channel-fill
+            td(data-type='dest'): code
+            td(data-type='dest'): .channel-meter: .channel-fill
+            td(data-type='output', data-linked-step=3): code
+            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+          tr.channel-blue
+            td.channel-name B
+            td(data-type='source'): code
+            td(data-type='source'): .channel-meter: .channel-fill
+            td(data-type='dest'): code
+            td(data-type='dest'): .channel-meter: .channel-fill
+            td(data-type='output', data-linked-step=3): code
+            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+          tr.channel-alpha
+            td.channel-name A
+            td(data-type='source'): code
+            td(data-type='source'): .channel-meter: .channel-fill
+            td(data-type='dest'): code
+            td(data-type='dest'): .channel-meter: .channel-fill
+            td(data-type='output', data-linked-step=3): code
+            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+
+
+        //- .code-steps
+        //-   .code-steps-code
+        //-     pre.language-(data-linked-step=0)
+        //-       code.language-.
+        //-         <span class="code-comment">/* source colour */</span>
+        //-         rgba(255, 0, 0, 0.6)
+        //-         <span class="code-comment">/* bg colour */</span>
+        //-         rgb(255, 255, 255)
+        //-     pre.language-(data-linked-step=1)
+        //-       code.language-.
+        //-         <span class="code-comment">/* source colour */</span>
+        //-         <del>rgba(255, 0, 0, 0.6)</del>
+        //-         <ins>rgb(153, 0, 0)</ins>
+        //-         <span class="code-comment">/* bg colour */</span>
+        //-         rgb(255, 255, 255)
+        //-     pre.language-(data-linked-step=2)
+        //-       code.language-.
+        //-         <span class="code-comment">/* source colour */</span>
+        //-         rgb(153, 0, 0)
+        //-         <span class="code-comment">/* bg colour */</span>
+        //-         <del>rgb(255, 255, 255)</del>
+        //-         <ins>rgb(102, 102, 102)</ins>
+        //-     pre.language-(data-linked-step=3)
+        //-       code.language-.
+        //-         <span class="code-comment">/* source colour */</span>
+        //-         rgb(153, 0, 0)
+        //-         <span class="code-comment">/* bg colour */</span>
+        //-         rgb(102, 102, 102)
+        //-         <span class="code-comment">/* rendered colour */</span>
+        //-         <ins>rgb(255, 102, 102)</ins>
+        //-   ol.code-steps-info
+        //-     li(data-linked-step=1) Multiply source RGB by source alpha <br>(<code>255 &times; 0.6</code>)
+        //-     li(data-linked-step=2) Multiply background RGB by <strong>inverse</strong> source alpha <br>(<code>255 &times; 0.4</code>)
+        //-     li(data-linked-step=3) Add them together to get the displayed colour
 
 
       // FINALE

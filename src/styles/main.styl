@@ -8,6 +8,7 @@
 $background = hsl(64, 100%, 61%)
 $foreground = #111
 $sydcss = #D9542B
+$code-comment = #aaa
 
 $headline = "Britannic Bold"
 $serif = didot, times new roman, serif
@@ -72,9 +73,8 @@ html
   justify-content: center
 
 .bespoke-backdrop.title.bespoke-backdrop-active
-  background: repeating-conic-gradient($background 0 7deg,
-                                       transparent 0 22deg,
-                                       $background 0 30deg)
+  background: repeating-conic-gradient($background 0 15deg,
+                                       transparent 0 30deg)
   transition: none
   animation: spin 40s linear infinite
 
@@ -149,8 +149,11 @@ h2
   font-size: 1.1em
   margin: 0.1em 0
 
+  + p
+    margin-top: .5em
+
 .bespoke-slide > h2:first-child
-  margin-top: 2em
+  margin-top: 1em
 
 h3
   font-size: 1em
@@ -160,6 +163,10 @@ h3
 h4
   font-size: 0.8em
   font-style: italic
+
+p + h3,
+p + h4
+  margin-top: 1.5em
 
 ul, ol
   padding: 0
@@ -183,6 +190,41 @@ a
   text-decoration: none
   border-bottom: 1px solid currentColor
 
+blockquote
+  background: rgba(255, 255, 255, 0.5)
+  border-radius: .5em
+  box-sizing: border-box
+  margin-top: .5em
+  padding: .75em
+  padding-left: calc(.75em + 40px)
+  quotes: '“' '”'
+  text-align: left
+  width: 90%
+
+  &:before
+    content: open-quote
+    float: left
+    font-size: 3em
+    margin-left: -40px
+    margin-top: -.2em
+    opacity: .5
+
+  > p
+    padding: 0
+
+  > code
+    display: inline-block
+    margin: .5em 0 .5em 1em
+
+  cite
+    display: inline-block
+    font-weight: 200
+    margin-top: .5em
+
+    &:before
+      content: $emdash
+      margin-right: .25em
+
 
 // Prism overrides
 
@@ -190,15 +232,27 @@ pre, pre[class*="language-"]
   border: none
   box-shadow: 1px 1px 0.4em $sydcss inset
 
-code
+code, code[class*="language-"]
   // font-family: $monospace !important
   font-style: normal
   font-weight: 200 !important
   text-align: left
+  text-shadow: none
 
+  del
+    color: $code-comment
+  ins
+    display: inline-block
+    outline: 1px dashed lime
+    // outline-offset: .1em
+    text-decoration: none
 
 
 // ========== EXTRAS ==========
+
+.wtf
+  font-size: 2em
+  margin-top: 2em
 
 .example
   min-height: 1em
@@ -234,6 +288,9 @@ code
 .linked-step-inactive,
 .code-steps-code .linked-step-active:not(.linked-step-current)
   display: none
+
+.code-comment
+  color: $code-comment
 
 
 // DEMO: Background images
@@ -355,6 +412,120 @@ code
 
   ul
     margin-top: .5em
+
+
+// DEMO: Blending
+
+// .blend-demo
+//   display: table
+//   border-spacing: .75em 0
+//   margin-top: 1em
+
+// .blend-row
+//   display: table-row
+
+// .blend-text, .blend-example
+//   display: table-cell
+
+// .blend-text
+//   text-align: left
+//   vertical-align: middle
+
+//   h3
+//     text-align: center
+
+// .blend-example
+//   background: white
+//   margin: 1em
+//   padding: 1em
+
+//   > span
+//     display: block
+//     height: 2em
+//     width: 2em
+
+.demo-blend .subtitle .linked-step-active:not(.linked-step-current)
+  display: none
+
+.demo-blend .example
+  background-color: white
+  height: 1em
+  min-width: 0
+  padding: .5em
+  position: absolute
+  right: .5em
+  top: .5em
+  width: 1em
+
+  > span
+    background-color: rgba(255, 0, 0, 0.6)
+    display: block
+    height: 1em
+    margin: 0 auto
+
+.demo-blend table
+  background-color: white
+  border-radius: .5em
+  border-spacing: .5em
+  margin-top: .5em
+  padding: .5em
+
+  td.linked-step-inactive,
+  th.linked-step-inactive
+    display: table-cell;
+    visibility: hidden;
+
+  code
+    display: block
+    text-align: right
+
+  .highlight
+    border-radius: .1em
+    display: inline-block
+    padding: .1em .3em
+    visibility: hidden
+
+  .highlight.linked-step-active
+    visibility: visible
+
+  .highlight.linked-step-current
+    background-color: #000
+    color: #fff
+    visibility: visible
+
+.channel-name
+  font-size: 1.5em
+  padding-right: .75em
+
+.channel-meter
+  border: 1px solid black
+  height: 2.5em
+  position: relative
+  width: 1.5em
+
+.channel-fill
+  background-color: currentColor
+  bottom: 0
+  position: absolute
+  transition: height 1s
+  width: 100%
+
+.channel-red .channel-name,
+.channel-red .channel-fill
+  color: hsl(0, 100%, 50%)
+
+.channel-green .channel-name,
+.channel-green .channel-fill
+  color: hsl(120, 80%, 40%)
+
+.channel-blue .channel-name,
+.channel-blue .channel-fill
+  color: hsl(240, 100%, 50%)
+
+.channel-alpha .channel-name,
+.channel-alpha .channel-fill
+  color: #666
+
 
 
 // DEMO: Logo

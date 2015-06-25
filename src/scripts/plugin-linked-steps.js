@@ -10,6 +10,10 @@ module.exports = function() {
       bullets = deck.slides.map(function(slide) {
         var steps = [];
         var stepNodes = [].slice.call(slide.querySelectorAll('[data-linked-step]'), 0);
+        var indicators = [].slice.call(slide.querySelectorAll('[data-linked-indicator]'), 0);
+        if (slide.hasAttribute('data-linked-indicator')) {
+          indicators.unshift(slide);
+        }
         stepNodes.forEach(function (step) {
           var stepNum = step.getAttribute('data-linked-step');
           if (stepNum) {
@@ -22,7 +26,7 @@ module.exports = function() {
           }
         });
         if (!steps.length) {
-          return steps;
+          return {indicators: [], steps: []};
         }
         // Re-index the possibly sparse array
         steps = steps.filter(function (s) {
@@ -32,7 +36,10 @@ module.exports = function() {
         if (steps[0].stepNum > 0) {
           steps.unshift({stepNum: 0, parts: []});
         }
-        return steps;
+        return {
+          indicators: indicators,
+          steps: steps
+        };
       }),
 
       next = function() {
@@ -62,7 +69,7 @@ module.exports = function() {
         activeStepIndex = stepIndex;
 
         bullets.forEach(function(slide, s) {
-          slide.forEach(function(step, st) {
+          slide.steps.forEach(function(step, st) {
             step.parts.forEach(function(part) {
               part.classList.add('linked-step');
 
@@ -81,11 +88,20 @@ module.exports = function() {
               }
             });
           });
+
+          slide.indicators.forEach(function(indicator) {
+            indicator.setAttribute('data-linked-current-step', stepIndex);
+          });
+        });
+
+        deck.fire('linked-step-change', {
+          slide: slideIndex,
+          step: stepIndex
         });
       },
 
       activeSlideHasBulletByOffset = function(offset) {
-        return bullets[activeSlideIndex][activeStepIndex + offset] !== undefined;
+        return bullets[activeSlideIndex].steps[activeStepIndex + offset] !== undefined;
       };
 
     deck.on('next', next);
