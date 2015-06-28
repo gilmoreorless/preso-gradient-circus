@@ -10,10 +10,9 @@ $foreground = #111
 $sydcss = #D9542B
 $code-comment = #aaa
 
-$headline = "Britannic Bold"
-$serif = didot, times new roman, serif
+$headline = 'Britannic Bold'
 $sans-serif = gill sans, helvetica, arial, arial, sans-serif
-$monospace = consolas, courier new, monospace
+$monospace = Consolas, Monaco, 'Andale Mono', monospace
 $emdash = '\2014'
 
 $gradient-background = radial-gradient(farthest-corner, $background, $sydcss 110%)
@@ -134,7 +133,7 @@ h1, h2, h3, p, li
   padding-left: 20px
   padding-right: 20px
 
-h1, h2, h3, p, li, pre
+h1, h2, h3, p, li, pre, table
   font-weight: 200
 
 h1
@@ -168,6 +167,11 @@ p + h3,
 p + h4
   margin-top: 1.5em
 
+p + p,
+p + ul,
+p + ol
+  margin-top: .5em
+
 ul, ol
   padding: 0
   margin: 0
@@ -189,6 +193,13 @@ a
   color: currentColor
   text-decoration: none
   border-bottom: 1px solid currentColor
+
+img
+  max-width: 95%
+
+p > img
+  max-width: 100%
+  margin-top: .5em
 
 blockquote
   background: rgba(255, 255, 255, 0.5)
@@ -217,7 +228,7 @@ blockquote
     margin: .5em 0 .5em 1em
 
   cite
-    display: inline-block
+    display: block
     font-weight: 200
     margin-top: .5em
 
@@ -233,7 +244,7 @@ pre, pre[class*="language-"]
   box-shadow: 1px 1px 0.4em $sydcss inset
 
 code, code[class*="language-"]
-  // font-family: $monospace !important
+  font-family: $monospace
   font-style: normal
   font-weight: 200 !important
   text-align: left
@@ -250,6 +261,8 @@ code, code[class*="language-"]
 
 // ========== EXTRAS ==========
 
+// --- Generic pieces ---
+
 .wtf
   font-size: 2em
   margin-top: 2em
@@ -259,6 +272,10 @@ code, code[class*="language-"]
   min-width: 50%
   margin: .5em
   position: relative
+
+  svg
+    height: 100%
+    width: 100%
 
   .marker
     position: absolute
@@ -270,6 +287,13 @@ code, code[class*="language-"]
     &:before
       content: '⬆︎'
       color: currentColor
+
+.demo-holder
+  background-color: white
+  border-radius: .5em
+  margin-top: .5em
+  padding: .5em
+
 
 // Code steps
 
@@ -291,6 +315,116 @@ code, code[class*="language-"]
 
 .code-comment
   color: $code-comment
+
+
+// --- Specific slides / demos ---
+
+// Intro
+
+.intro img
+  margin-left: 1em
+  vertical-align: middle
+
+
+// Gradient gallery
+
+.gradient-gallery
+  display: flex
+  flex-wrap: wrap
+
+  $grad-from = hsl(0, 80%, 50%)
+  $grad-mid = hsl(120, 80%, 50%)
+  $grad-to = hsl(240, 80%, 50%)
+
+  li
+    display: block
+    margin-top: 1em
+    text-align: center
+    width: 40%
+
+  .example
+    background-repeat: no-repeat
+    display: block
+    height: 7em
+    margin: 0 0 .5em 0
+    width: 100%
+
+  .linear .example
+    background-image: linear-gradient(to right, $grad-from, $grad-mid, $grad-to)
+
+  .radial .example
+    background-image: radial-gradient($grad-from, $grad-mid, $grad-to)
+
+  .repeating-linear .example
+    background-image: repeating-linear-gradient(to right, $grad-from 0, $grad-mid 1em, $grad-to 2em, $grad-from 3em)
+
+  .repeating-radial .example
+    background-image: repeating-radial-gradient($grad-from 0, $grad-mid 1em, $grad-to 2em, $grad-from 3em)
+
+.patterns p
+  margin-top: .5em
+
+
+// Animation support
+
+.anim-support
+  border-spacing: .5em
+  margin-top: .5em
+
+  th
+    font-weight: 400
+    padding: 0 .25em
+
+    &:first-child
+      text-align: left
+
+
+// Conic gradients
+
+.conic-comparison
+  display: flex
+
+  .linked-step-inactive
+    display: block
+    opacity: 0
+
+  p:before
+    font-size: 1.1em
+    margin-right: .5em
+
+  .no p:before
+    content: '✘'
+    color: #600
+
+  .yes p:before
+    content: '✔'
+    color: #060
+
+  .example
+    height: 250px
+    width:  250px
+
+    img
+      max-width: 100%
+
+  .yes .example
+    background-image: conic-gradient(#f06, #000)
+
+.conic-demos .example
+  margin-top: 1.5em
+  height: 200px
+  width: 200px
+
+.conic-demo-1 .example
+  background-image: conic-gradient(#eee .1turn, black, #eee 326deg);
+
+.conic-demo-2 .example
+  background-image: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+  border-radius: 50%
+
+.conic-demo-3 .example
+  background-image: conic-gradient(yellowgreen 40%, gold 0 70%, #f06 0);
+  border-radius: 50%
 
 
 // DEMO: Background images
@@ -395,10 +529,6 @@ code, code[class*="language-"]
     min-width: 0
     width: 5em
 
-    svg
-      height: 100%
-      width: 100%
-
 .trans-list
   flex-grow: 1
   text-align: left
@@ -414,40 +544,12 @@ code, code[class*="language-"]
     margin-top: .5em
 
 
-// DEMO: Blending
+// DEMO: Basic Blending
 
-// .blend-demo
-//   display: table
-//   border-spacing: .75em 0
-//   margin-top: 1em
-
-// .blend-row
-//   display: table-row
-
-// .blend-text, .blend-example
-//   display: table-cell
-
-// .blend-text
-//   text-align: left
-//   vertical-align: middle
-
-//   h3
-//     text-align: center
-
-// .blend-example
-//   background: white
-//   margin: 1em
-//   padding: 1em
-
-//   > span
-//     display: block
-//     height: 2em
-//     width: 2em
-
-.demo-blend .subtitle .linked-step-active:not(.linked-step-current)
+.demo-blend-basic .subtitle .linked-step-active:not(.linked-step-current)
   display: none
 
-.demo-blend .example
+.demo-blend-basic .example
   background-color: white
   height: 1em
   min-width: 0
@@ -463,12 +565,8 @@ code, code[class*="language-"]
     height: 1em
     margin: 0 auto
 
-.demo-blend table
-  background-color: white
-  border-radius: .5em
+table.channels
   border-spacing: .5em
-  margin-top: .5em
-  padding: .5em
 
   td.linked-step-inactive,
   th.linked-step-inactive
@@ -527,6 +625,38 @@ code, code[class*="language-"]
   color: #666
 
 
+// DEMO: Gradient Blending
+
+.demo-blend-gradient
+  .example
+    height: 1em
+    margin-bottom: 0
+    width: 300px
+
+    &.premul
+      background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), transparent)
+
+    + .example
+      margin-top: 0
+
+  table.channels
+    border-spacing: 0
+    padding: .5em
+
+    h4
+      margin: 1.5em 0 .5em
+
+    .marker h4
+      color: hsl(240, 100%, 50%)
+      font-weight: 400
+
+  canvas
+    border: 1px solid #333
+    height: 50px
+    width: 300px
+
+.demo-blend-gradient.funky .example.premul
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 0, 255, 0.2))
 
 // DEMO: Logo
 

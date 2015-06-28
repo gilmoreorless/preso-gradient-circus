@@ -11,19 +11,22 @@ html
 
     article
 
-      section(data-bespoke-hash='intro')
-        h2 Who’s this bozo? [IMG]
+      section.intro(data-bespoke-hash='intro')
+        h2
+          | Who’s this bozo?
+          img(src='images/bozo.png')
         ul
           li <a href="https://twitter.com/iamnotyourbroom">@iamnotyourbroom</a>
           li <a href="https://shoehornwithteeth.com/">shoehornwithteeth.com</a>
+          li Web tinkerer
 
-      section.middle
+      section.middle(data-bespoke-hash='seuss')
         img(src='images/If-I-ran-the-circus.jpg', height='70%')
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='gradient-circus')
         h1 Gradient Circus
 
-      section
+      section(data-bespoke-hash='types')
         h2 Types of gradients
         ul.gradient-gallery
           li.linear
@@ -39,61 +42,113 @@ html
             span.example
             code repeating-radial-gradient
 
-      section
+      section(data-bespoke-hash='support')
         h2 Support
-        a(href='http://caniuse.com/#feat=css-gradients') No prefixes needed!
-        img(src='SCREENSHOT')
+        p: a(href='http://caniuse.com/#feat=css-gradients') No prefixes needed!
+        p: img(src='images/caniuse-gradients.png')
 
 
       // ACT I
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-i-tips')
         h1 Act I
         h2 Tips and tricks
 
-      section
+      section.patterns(data-bespoke-hash='patterns')
         h2 Patterns
-        | [IMG]
+        .single-bullet(data-linked-step=0)
+          p Gradients only &mdash; <a href="http://lea.verou.me/css3patterns/">lea.verou.me/css3patterns</a>
+          p: img(src='images/gradient-gallery-lea.png')
+        .single-bullet(data-linked-step=1)
+          p Gradients + blend modes &mdash; <a href="http://bennettfeely.com/gradients/">bennettfeely.com/gradients</a>
+          p: img(src='images/gradient-gallery-bennett.png')
 
-      section
+      section(data-bespoke-hash='pictures')
         h2 Pictures
-        p A single div
+        p A single div &mdash; <a href="http://a.singlediv.com/">a.singlediv.com</a>
+        p: img(src='images/gradient-gallery-asinglediv.png')
 
-      section
+      section(data-bespoke-hash='debugging')
         h2 Debugging
-        p Gradient inspector
+        p Gradient Inspector &mdash; <a href="https://chrome.google.com/webstore/detail/css-gradient-inspector/blklpjonlhpakchaahdnkcjkfmccmdik">Chrome Extension</a>
+        p: img(src='images/gradient-inspector.png')
 
-      section(data-bespoke-state='grey-area')
-        h2 Animation
+      section(data-bespoke-state='grey-area', data-bespoke-hash='animation')
+        h2 Background animation
         p Bit of a grey area
+        ul
+          li One spec says <strong>no</strong>
+          li One spec says <strong>yes</strong>
+          li Browsers say <strong>um, maybe&hellip;?</strong>
+        table.anim-support(data-linked-step=1)
+          tr
+            th
+            th Cross-fade pictures
+            th Transition gradients
+          tr
+            th Chrome
+            td ✔
+            td -
+          tr
+            th Safari
+            td ✔
+            td -
+          tr
+            th IE / Edge
+            td -
+            td ✔
+          tr
+            th Firefox
+            td -
+            td -
 
-      section
-        h2 Future
-        p Conic gradients
-        p Something something Polyfill
+      section(data-bespoke-hash='future')
+        h2 The future
+        p: <a href="http://dev.w3.org/csswg/css-images-4/">CSS Images Level 4</a> &mdash; Nowhere near finished
+        p Among other things, it has&hellip;
+        h3 Conic gradients
+        .conic-comparison
+          .no(data-linked-step=1)
+            p Not this
+            .example: img(src='images/harry.jpg')
+          .yes(data-linked-step=2)
+            p This
+            .example
+
+      section(data-bespoke-hash='future-today')
+        h2 The future &ndash; today
+        p: em Obligatory slide about Lea Verou
+        ul
+          li From <a href="http://lea.verou.me/specs/conical-gradient/">rough spec</a> to <a href="http://www.w3.org/TR/css4-images/#conic-gradients">proper spec</a>
+          li Polyfill: <a href="https://leaverou.github.io/conic-gradient/">leaverou.github.io/conic-gradient</a>
+          li Use it, promote it, harass browsers for support
+        .conic-comparison.conic-demos
+          .conic-demo-1: .example
+          .conic-demo-2: .example
+          .conic-demo-3: .example
 
 
       // ACT II
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-ii-angles')
         h1 Act II
         h2 Linear gradient angles
 
-      section
+      section(data-bespoke-hash='do-you-really')
         | [IMG FROM PATRICK BROSSET'S ARTICLE]
 
-      section
+      section(data-bespoke-hash='linear-angles')
         h2 CoCodePen the Clown
         video(src='SCREENCAST OF USING THE DEMO')
 
 
       // ACT III
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iii-layering')
         h1 Act III
         h2 Background image layering
 
-      section.demo-layering(data-bgimage-showcase)
+      section.demo-layering(data-bgimage-showcase, data-bespoke-hash='layering')
         h2 Images from the top, then colour
         p Remember, gradients are just images
         .code-steps
@@ -110,7 +165,7 @@ html
             .showcase-container
               .showcase-target
 
-      section.demo-positioning(data-bgimage-showcase)
+      section.demo-positioning(data-bgimage-showcase, data-bespoke-hash='positioning')
         h2 Images from the top, then colour
         .code-steps
           .code-steps-code
@@ -132,11 +187,11 @@ html
 
       // ACT IV
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iv-colour')
         h1 Act IV
         h2 Colour calculations
 
-      section.demo-colour-calcs
+      section.demo-colour-calcs(data-bespoke-hash='colour-interpolation')
         h2 A basic example
         .example(style='background:linear-gradient(to right, hsl(220, 90%, 50%), hsl(0, 90%, 60%));')
           .marker(data-linked-step=4, style="color: rgba(129, 75, 152, 1)")
@@ -180,7 +235,7 @@ html
             li(data-linked-step=3) Interpolate each channel separately
             li(data-linked-step=4) Example at 50%
 
-      section.demo-transparency
+      section.demo-transparency(data-bespoke-hash='transparency')
         h2 Transparency
         p
           code transparent == rgba(0, 0, 0, 0)
@@ -214,7 +269,7 @@ html
               li Firefox
               li IE / Edge
 
-      section
+      section(data-bespoke-hash='premultiplied-alpha')
         h2 Pre-whatified what now?
         p Pre-multiplied alpha &ndash; keeping <code>transparent</code> pretty
         blockquote.single-bullet(data-linked-step=1)
@@ -230,39 +285,7 @@ html
           cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
         h3.wtf(data-linked-step=2) Simple, right?
 
-      //- section
-      //-   h2 Let’s try again
-      //-   p Blending with a white background
-      //-   .blend-demo
-      //-     .blend-row
-      //-       .blend-text
-      //-         h3 Defined as
-      //-       .blend-text
-      //-       .blend-text
-      //-         h3 Displayed as
-      //-     .blend-row
-      //-       .blend-text
-      //-         code rgba(255, 0, 0, 1)
-      //-       .blend-example
-      //-         span(style='background-color:red')
-      //-       .blend-text
-      //-         code rgba(255, 0, 0, 1)
-      //-     .blend-row
-      //-       .blend-text
-      //-         code rgba(255, 0, 0, 0.5)
-      //-       .blend-example
-      //-         span(style='background-color:rgba(255, 0, 0, 0.5)')
-      //-       .blend-text
-      //-         code rgba(255, 127, 127, 1)
-      //-     .blend-row
-      //-       .blend-text
-      //-         code rgba(255, 0, 128, 0.75)
-      //-       .blend-example
-      //-         span(style='background-color:rgba(255, 0, 128, 0.75)')
-      //-       .blend-text
-      //-         code rgba(255, 63, 159, 1)
-
-      section.demo-blend(data-linked-indicator)
+      section.demo-blend-basic(data-bespoke-hash='blending-basic')
         h2 Let’s try again
         p.subtitle
           span(data-linked-step=0) Blending partly-transparent red on a white background.
@@ -271,88 +294,121 @@ html
           span(data-linked-step=3) 3. Add them together
         .example
           span
-        table
-          tr
-            th
-            th(colspan=2): code source<br>&nbsp;<span class="highlight" data-linked-step="1">&times; 0.6</span>
-            th(colspan=2): code + destination<br>&nbsp;<span class="highlight" data-linked-step="2">&times; 0.4</span>
-            th(colspan=2, data-linked-step=3): code = output<br><span class="highlight">&nbsp;</span>
-          tr.channel-red
-            td.channel-name R
-            td(data-type='source'): code
-            td(data-type='source'): .channel-meter: .channel-fill
-            td(data-type='dest'): code
-            td(data-type='dest'): .channel-meter: .channel-fill
-            td(data-type='output', data-linked-step=3): code
-            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
-          tr.channel-green
-            td.channel-name G
-            td(data-type='source'): code
-            td(data-type='source'): .channel-meter: .channel-fill
-            td(data-type='dest'): code
-            td(data-type='dest'): .channel-meter: .channel-fill
-            td(data-type='output', data-linked-step=3): code
-            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
-          tr.channel-blue
-            td.channel-name B
-            td(data-type='source'): code
-            td(data-type='source'): .channel-meter: .channel-fill
-            td(data-type='dest'): code
-            td(data-type='dest'): .channel-meter: .channel-fill
-            td(data-type='output', data-linked-step=3): code
-            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
-          tr.channel-alpha
-            td.channel-name A
-            td(data-type='source'): code
-            td(data-type='source'): .channel-meter: .channel-fill
-            td(data-type='dest'): code
-            td(data-type='dest'): .channel-meter: .channel-fill
-            td(data-type='output', data-linked-step=3): code
-            td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+        .demo-holder
+          table.channels
+            tr
+              th
+              th(colspan=2): code source<br>&nbsp;<span class="highlight" data-linked-step="1">&times; 0.6</span>
+              th(colspan=2): code + destination<br>&nbsp;<span class="highlight" data-linked-step="2">&times; 0.4</span>
+              th(colspan=2, data-linked-step=3): code = output<br><span class="highlight">&nbsp;</span>
+            tr.channel-red
+              td.channel-name R
+              td(data-type='source'): code
+              td(data-type='source'): .channel-meter: .channel-fill
+              td(data-type='dest'): code
+              td(data-type='dest'): .channel-meter: .channel-fill
+              td(data-type='output', data-linked-step=3): code
+              td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+            tr.channel-green
+              td.channel-name G
+              td(data-type='source'): code
+              td(data-type='source'): .channel-meter: .channel-fill
+              td(data-type='dest'): code
+              td(data-type='dest'): .channel-meter: .channel-fill
+              td(data-type='output', data-linked-step=3): code
+              td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+            tr.channel-blue
+              td.channel-name B
+              td(data-type='source'): code
+              td(data-type='source'): .channel-meter: .channel-fill
+              td(data-type='dest'): code
+              td(data-type='dest'): .channel-meter: .channel-fill
+              td(data-type='output', data-linked-step=3): code
+              td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
+            tr.channel-alpha
+              td.channel-name A
+              td(data-type='source'): code
+              td(data-type='source'): .channel-meter: .channel-fill
+              td(data-type='dest'): code
+              td(data-type='dest'): .channel-meter: .channel-fill
+              td(data-type='output', data-linked-step=3): code
+              td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
 
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients')
+        h2 Now back to gradients
+        blockquote.single-bullet(data-linked-step=0)
+          p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
+          code cs = Cs x αs
+          cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
+        .demo-holder(data-linked-step=1)
+          table.channels
+            tr.examples
+              td
+              td
+                .example.postmul
+                  include postmul-gradient-svg
+                .example.premul
+            tr.title
+              td
+              td: h4 Normal
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-defs='post-red')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-defs='post-alpha')
+            tr.title
+              td
+              td: h4 Pre-multiplied
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-defs='pre-red')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-defs='pre-alpha')
 
-        //- .code-steps
-        //-   .code-steps-code
-        //-     pre.language-(data-linked-step=0)
-        //-       code.language-.
-        //-         <span class="code-comment">/* source colour */</span>
-        //-         rgba(255, 0, 0, 0.6)
-        //-         <span class="code-comment">/* bg colour */</span>
-        //-         rgb(255, 255, 255)
-        //-     pre.language-(data-linked-step=1)
-        //-       code.language-.
-        //-         <span class="code-comment">/* source colour */</span>
-        //-         <del>rgba(255, 0, 0, 0.6)</del>
-        //-         <ins>rgb(153, 0, 0)</ins>
-        //-         <span class="code-comment">/* bg colour */</span>
-        //-         rgb(255, 255, 255)
-        //-     pre.language-(data-linked-step=2)
-        //-       code.language-.
-        //-         <span class="code-comment">/* source colour */</span>
-        //-         rgb(153, 0, 0)
-        //-         <span class="code-comment">/* bg colour */</span>
-        //-         <del>rgb(255, 255, 255)</del>
-        //-         <ins>rgb(102, 102, 102)</ins>
-        //-     pre.language-(data-linked-step=3)
-        //-       code.language-.
-        //-         <span class="code-comment">/* source colour */</span>
-        //-         rgb(153, 0, 0)
-        //-         <span class="code-comment">/* bg colour */</span>
-        //-         rgb(102, 102, 102)
-        //-         <span class="code-comment">/* rendered colour */</span>
-        //-         <ins>rgb(255, 102, 102)</ins>
-        //-   ol.code-steps-info
-        //-     li(data-linked-step=1) Multiply source RGB by source alpha <br>(<code>255 &times; 0.6</code>)
-        //-     li(data-linked-step=2) Multiply background RGB by <strong>inverse</strong> source alpha <br>(<code>255 &times; 0.4</code>)
-        //-     li(data-linked-step=3) Add them together to get the displayed colour
-
+      section.demo-blend-gradient.funky(data-bespoke-hash='blending-side-effects')
+        h2 Funky side effects
+        blockquote.single-bullet(data-linked-step=0)
+          p Thus the formula for simple alpha compositing using pre-multiplied values becomes
+          code co = cs + cb x (1 - αs)
+          p To extract the color component of a pre-multiplied value, the formula is reversed:
+          code Co = co / αo
+          cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
+        .demo-holder(data-linked-step=1)
+          table.channels
+            tr.examples
+              td
+              td
+                .example.postmul
+                  - var useGreen = true
+                  include postmul-gradient-svg
+                .example.premul
+            tr.title
+              td
+              td: h4 Normal
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-defs='post2-red')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-defs='post2-alpha')
+            tr.title
+              td
+              td: h4 Pre-multiplied
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-defs='pre2-red')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-defs='pre2-alpha')
 
       // FINALE
       
-      section(data-bespoke-state='title', data-bespoke-backdrop='title')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='grand-finale')
         h1 Grand Finale
 
-      section.demo-logo(data-bgimage-showcase)
+      section.demo-logo(data-bgimage-showcase, data-bespoke-hash='this-is-the-last-slide')
         .showcase-container
           .showcase-target(data-showcase-start-mode='exploded')
         h2 Thanks, SydCSS!

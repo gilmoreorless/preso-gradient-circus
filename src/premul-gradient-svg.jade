@@ -2,15 +2,17 @@
 svg(xmlns="http://www.w3.org/2000/svg", style="background:white")
   desc Image of a color gradient
   defs
-    linearGradient#nonpremul-gradient(x1=0, y1=0, x2=0, y2="100%")
-      stop(offset="0%", stop-color="red")
-      stop(offset="50%", stop-color="black", stop-opacity="0")
-      stop(offset="100%", stop-color="blue")
-    linearGradient#premul-gradient(x1=0, y1=0, x2=0, y2="100%")
-      stop(offset="0%", stop-color="red")
-      stop(offset="50%", stop-color="red", stop-opacity="0")
-      stop(offset="50%", stop-color="blue", stop-opacity="0")
-      stop(offset="100%", stop-color="blue")
+    if usePremul
+      linearGradient#premul-gradient(x1=0, y1=0, x2=0, y2="100%")
+        stop(offset="0%", stop-color="red")
+        stop(offset="50%", stop-color="red", stop-opacity="0")
+        stop(offset="50%", stop-color="blue", stop-opacity="0")
+        stop(offset="100%", stop-color="blue")
+    else
+      linearGradient#nonpremul-gradient(x1=0, y1=0, x2=0, y2="100%")
+        stop(offset="0%", stop-color="red")
+        stop(offset="50%", stop-color="black", stop-opacity="0")
+        stop(offset="100%", stop-color="blue")
   if usePremul
     rect(width="100%", height="100%", fill="url(#premul-gradient)")
   else
