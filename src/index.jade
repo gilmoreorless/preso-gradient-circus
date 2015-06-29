@@ -135,11 +135,12 @@ html
         h2 Linear gradient angles
 
       section(data-bespoke-hash='do-you-really')
-        | [IMG FROM PATRICK BROSSET'S ARTICLE]
+        h2 Do you really understand?
+        p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
+        p: video(src='images/pbrosset-medium.mov')
 
-      section(data-bespoke-hash='linear-angles')
-        h2 CoCodePen the Clown
-        video(src='SCREENCAST OF USING THE DEMO')
+      section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
+        p: video(src='images/pbrosset-codepen.mov')
 
 
       // ACT III
@@ -148,7 +149,7 @@ html
         h1 Act III
         h2 Background image layering
 
-      section.demo-layering(data-bgimage-showcase, data-bespoke-hash='layering')
+      section.demo-layering(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='layering')
         h2 Images from the top, then colour
         p Remember, gradients are just images
         .code-steps
@@ -165,7 +166,7 @@ html
             .showcase-container
               .showcase-target
 
-      section.demo-positioning(data-bgimage-showcase, data-bespoke-hash='positioning')
+      section.demo-positioning(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='positioning')
         h2 Images from the top, then colour
         .code-steps
           .code-steps-code
@@ -239,13 +240,15 @@ html
         h2 Transparency
         p
           code transparent == rgba(0, 0, 0, 0)
-          pre.language-(data-linked-step=3)
-            code.language-.
-              linear-gradient(red, rgba(255,0,0,0) 50%,
-                              rgba(0,0,255,0) 50%, blue);
-          pre.language-.hide-when-previous-visible
-            code.language-.
-              linear-gradient(red, transparent, blue);
+          .step-container
+            pre.language-(data-linked-step=3)
+              code.language-.
+                linear-gradient(red, rgba(255,0,0,0) 50%,
+                                     rgba(0,0,255,0) 50%, blue);
+            pre.language-.hide-when-previous-visible
+              code.language-.
+                linear-gradient(red, transparent, blue);
+
 
         .trans-demo
           .trans-list
@@ -269,7 +272,7 @@ html
               li Firefox
               li IE / Edge
 
-      section(data-bespoke-hash='premultiplied-alpha')
+      section.quote-premul(data-bespoke-hash='premultiplied-alpha')
         h2 Pre-whatified what now?
         p Pre-multiplied alpha &ndash; keeping <code>transparent</code> pretty
         blockquote.single-bullet(data-linked-step=1)
@@ -381,7 +384,7 @@ html
               td
               td
                 .example.postmul
-                  - var useGreen = true
+                  - var useBlue = true
                   include postmul-gradient-svg
                 .example.premul
             tr.title
@@ -408,9 +411,9 @@ html
       section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='grand-finale')
         h1 Grand Finale
 
-      section.demo-logo(data-bgimage-showcase, data-bespoke-hash='this-is-the-last-slide')
+      section.demo-logo.no-zoom(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='this-is-the-last-slide')
         .showcase-container
-          .showcase-target(data-showcase-start-mode='exploded')
+          .showcase-target(data-showcase-start-mode='exploded', data-showcase-timing='slow')
         h2 Thanks, SydCSS!
         h4 @iamnotyourbroom
         

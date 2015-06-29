@@ -83,7 +83,7 @@ function drawBlendGraph(canvas, opts) {
 
   // Draw the background colour
   if (opts.type !== 'alpha') {
-    ctx.fillStyle = opts.colour[1];
+    ctx.fillStyle = opts.colour.bg;
     ctx.beginPath();
     ctx.moveTo(0, height);
     for (x = 0; x <= width; x++) {
@@ -102,13 +102,33 @@ function drawBlendGraph(canvas, opts) {
   }
 
   // Draw the primary colour
-  ctx.fillStyle = opts.colour[0];
+  ctx.fillStyle = opts.colour.source;
   ctx.beginPath();
   ctx.moveTo(0, height);
   ctx.lineTo(0, yPos(from[defIdx]));
   ctx.lineTo(width, yPos(to[defIdx]));
   ctx.lineTo(width, height);
   ctx.fill();
+
+  // Draw the post-multiplied mark
+  if (opts.type !== 'alpha') {
+    ctx.strokeStyle = opts.colour.sourcePost;
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+    for (x = 0; x <= width; x++) {
+      perc = x / width;
+      col = lerp(from[defIdx], to[defIdx], perc);
+      alpha = lerp(from[1], to[1], perc);
+      if (opts.isPremul) {
+        y = col;
+      } else {
+        y = col * alpha;
+      }
+      ctx.lineTo(x, yPos(y));
+    }
+    ctx.lineTo(width, height);
+    ctx.stroke();
+  }
 
   // 50% marker line
   // ctx.strokeStyle = 'hsl(240, 100%, 50%)';
@@ -124,8 +144,8 @@ drawBlendGraph.defs = {
   pre2: {from: [1, 1], to: [0, 0.2]},
 };
 drawBlendGraph.colours = {
-  red: ['hsl(0, 100%, 50%)', 'hsl(0, 100%, 80%)'],
-  alpha: ['#666', '#aaa']
+  red: {source: 'hsl(0, 100%, 50%)', bg: 'hsl(0, 100%, 80%)', sourcePost: 'hsl(0, 80%, 20%)'},
+  alpha: {source: '#666'}
 };
 each.call(document.querySelectorAll('.demo-blend-gradient canvas'), function (canvas) {
   var defsId = canvas.getAttribute('data-defs');
@@ -187,7 +207,8 @@ var showcasePlugin = function () {
         bgImageShowcase.inspect(target, {
           container: target.parentNode,
           padding: 40,
-          startMode: target.getAttribute('data-showcase-start-mode')
+          startMode: target.getAttribute('data-showcase-start-mode'),
+          timing: target.getAttribute('data-showcase-timing')
         });
       }
     });
@@ -223,4 +244,17 @@ require('conic-gradient');
 deck.on('linked-step-change', function (event) {
   updateBlendDemo(event.step);
 });
+
+// Play/pause videos
+document.addEventListener('keyup', function (e) {
+  if (e.keyCode === 80) {  // 'P'
+    var index = deck.slide();
+    var slide = deck.slides[index];
+    var video = slide.querySelector('video');
+    if (video) {
+      var isPaused = video.paused;
+      video[isPaused ? 'play' : 'pause']();
+    }
+  }
+}, false);
 

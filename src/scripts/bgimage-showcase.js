@@ -170,7 +170,9 @@ function buildExploded() {
 function runLayout() {
   var layout = Showcase.layouts[this.mode];
   if (layout) {
-    this.container.className = 'bgimage-showcase-container bgimage-showcase-mode-' + this.mode;
+    this.container.className = 'bgimage-showcase-container' +
+      ' bgimage-showcase-timing-' + this.timing +
+      ' bgimage-showcase-mode-' + this.mode;
     layout.call(this);
   }
 }
@@ -185,6 +187,7 @@ function Showcase(elem, options) {
   this.source = elem;
   this.mode = this.options.startMode || Showcase.modes.MODE_COMBINED;
   this.padding = this.options.padding || PADDING;
+  this.timing = this.options.timing || 'fast';
   this.container = null;
   this.layers = [];
   this._style = '';
@@ -215,11 +218,11 @@ Showcase.prototype.setup = function () {
     return false;
   }
   var optParent = this.options.container;
-  var bounds = this.source.getBoundingClientRect();
+  // var bounds = this.source.getBoundingClientRect();
   this.container = document.createElement('div');
-  this.container.className = 'bgimage-showcase-container';
-  this.container.style.left = (bounds.left - this.padding) + 'px';
-  this.container.style.top = (bounds.top - this.padding) + 'px';
+  this.container.className = 'bgimage-showcase-container bgimage-showcase-timing-' + this.timing;
+  this.container.style.left = (this.source.offsetLeft - this.padding) + 'px';
+  this.container.style.top = (this.source.offsetTop - this.padding) + 'px';
   this.container.style.padding = this.padding + 'px';
   (optParent || document.body).appendChild(this.container);
   if (optParent) {
@@ -284,11 +287,12 @@ Showcase.layouts[Showcase.modes.MODE_EXPLODED] = function () {
 
 function ShowcaseLayout3D(multiplier) {
   return function () {
+    var height = parseFloat(this.dims.height) || 0;
     var yPos = function (count) {
       return (PADDING * multiplier * count) + 'px';
     };
     var count = this.layers.length;
-    this.container.style.height = (this.padding * count * 5) + 'px';
+    this.container.style.height = (this.padding * count * multiplier / 2 + height) + 'px';
     var i = count;
     var extra = 'rotateX(50deg) rotateZ(-45deg) scale(0.8)';
     while (i--) {

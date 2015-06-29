@@ -16,6 +16,7 @@ $monospace = Consolas, Monaco, 'Andale Mono', monospace
 $emdash = '\2014'
 
 $gradient-background = radial-gradient(farthest-corner, $background, $sydcss 110%)
+$img-shadow = 0 0 30px -3px #000
 
 *
   margin: 0
@@ -68,8 +69,34 @@ html
   &.middle
     justify-content: center
 
-.bespoke-parent.title .bespoke-slide
+  &.no-zoom
+    zoom: 1 !important
+
+.bespoke-parent.title .bespoke-slide,
+.bespoke-parent.middle .bespoke-slide
   justify-content: center
+
+.bespoke-parent.grey-area
+  background: #aaa
+
+.bespoke-parent.showcase
+  overflow: overlay
+
+.bespoke-inactive
+  opacity: 0
+  pointer-events: none
+
+.bespoke-backdrop
+  display: none
+  height: 150vw
+  left: 50%
+  margin: -75vw 0 0 -75vw
+  position: absolute
+  top: 50%
+  width: 150vw
+
+  &-active
+    display: block
 
 .bespoke-backdrop.title.bespoke-backdrop-active
   background: repeating-conic-gradient($background 0 15deg,
@@ -77,50 +104,14 @@ html
   transition: none
   animation: spin 40s linear infinite
 
-.bespoke-parent.grey-area
-  background: #aaa
-
 @keyframes spin
   from
-    transform: scale(2) rotate(0turn)
+    transform: rotate(0turn)
   to
-    transform: scale(2) rotate(1turn)
-
-
-.bespoke-inactive
-  opacity: 0
-  pointer-events: none
-
-.bespoke-backdrop
-  transition: opacity .5s ease
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  opacity: 0
-  &-active
-    opacity: 1
-
-.bespoke-progress-parent
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  height: .3vw
-  z-index: 1
-
-.bespoke-progress-bar
-  background: $foreground
-  position: absolute
-  top: 0
-  left: 0
-  height: 100%
-  transition: width .5s ease
+    transform: rotate(1turn)
 
 .bespoke-bullet-inactive,
-.single-bullet.bespoke-bullet-active:not(.bespoke-bullet-current),
-.single-bullet.linked-step-active:not(.linked-step-current)
+.single-bullet.bespoke-bullet-active:not(.bespoke-bullet-current)
   display: none
 
 strong
@@ -140,6 +131,9 @@ h1
   font-size: 2em
   font-family: $headline
   margin: 0.17em 0
+
+.title h1
+  text-shadow: 2px 2px hsla(30, 90%, 40%, 0.4)
 
 h2
   font-family: $headline
@@ -178,12 +172,9 @@ ul, ol
   text-align: left
 
 ul li
-  // list-style-image: radial-gradient(farthest-side, green, red 70%, transparent 99%)
-  // list-style: none
   margin: .2em .2em .2em 1.75em
   font-style: normal
   padding-left: 0
-  // transform: translateX(-6px)
 
 ol li
   margin: .2em .2em .2em 2.2em
@@ -194,12 +185,17 @@ a
   text-decoration: none
   border-bottom: 1px solid currentColor
 
-img
+img, video
+  box-shadow: $img-shadow
   max-width: 95%
 
-p > img
+p > img,
+p > video
   max-width: 100%
   margin-top: .5em
+
+p > video
+  max-height: 100%
 
 blockquote
   background: rgba(255, 255, 255, 0.5)
@@ -245,6 +241,7 @@ pre, pre[class*="language-"]
 
 code, code[class*="language-"]
   font-family: $monospace
+  font-size: .916666667em
   font-style: normal
   font-weight: 200 !important
   text-align: left
@@ -268,6 +265,7 @@ code, code[class*="language-"]
   margin-top: 2em
 
 .example
+  box-shadow: $img-shadow
   min-height: 1em
   min-width: 50%
   margin: .5em
@@ -294,6 +292,28 @@ code, code[class*="language-"]
   margin-top: .5em
   padding: .5em
 
+  .example
+    box-shadow: none
+
+
+// Linked steps (better bullets)
+
+.linked-step
+  transition: opacity .5s ease
+
+.linked-step-inactive
+  opacity: 0
+
+.linked-step-inactive.single-bullet,
+.linked-step-active.single-bullet:not(.linked-step-current)
+  display: none
+
+.step-container
+  position: relative
+
+pre.linked-step
+  position: absolute
+
 
 // Code steps
 
@@ -304,17 +324,19 @@ code, code[class*="language-"]
 
 .code-steps-code,
 .code-steps-info
+  position: relative
   width: 50%
 
 .code-steps-code pre
   margin: 0
-
-.linked-step-inactive,
-.code-steps-code .linked-step-active:not(.linked-step-current)
-  display: none
+  position: absolute
 
 .code-comment
   color: $code-comment
+
+// .code-steps-code .linked-step-inactive,
+// .code-steps-code .linked-step-active:not(.linked-step-current)
+//   display: none
 
 
 // --- Specific slides / demos ---
@@ -323,6 +345,7 @@ code, code[class*="language-"]
 
 .intro img
   margin-left: 1em
+  box-shadow: none
   vertical-align: middle
 
 
@@ -429,8 +452,8 @@ code, code[class*="language-"]
 
 // DEMO: Background images
 
-.bespoke-slide[data-bgimage-showcase]
-  overflow: auto
+// .bespoke-slide[data-bgimage-showcase]
+//   overflow: auto
 
 .showcase-container
   // background: #bbb
@@ -455,6 +478,9 @@ code, code[class*="language-"]
   .bgimage-showcase-active &
     display: none
 
+$bgimage-timing-fast = 1s
+$bgimage-timing-slow = 3s
+
 .bgimage-showcase-container
   // background-color: rgba(255, 255, 255, .4)
   // background-color: rgba(0, 0, 0, .4)
@@ -463,12 +489,16 @@ code, code[class*="language-"]
   position: absolute
   perspective: 10000px
   perspective-origin: 0 100%
-  transition: height 1s
+  transition: height $bgimage-timing-fast
 
 .bgimage-showcase-layer
   border: 1px solid #330
   position: absolute
-  transition: all 1s
+  transition: all $bgimage-timing-fast
+
+.bgimage-showcase-container.bgimage-showcase-timing-slow,
+.bgimage-showcase-timing-slow .bgimage-showcase-layer
+  transition-duration: $bgimage-timing-slow
 
 .bgimage-showcase-mode-3d .bgimage-showcase-layer,
 .bgimage-showcase-mode-3d-expanded .bgimage-showcase-layer
@@ -516,7 +546,8 @@ code, code[class*="language-"]
   padding: .75em
 
 .demo-transparency .linked-step-current + .hide-when-previous-visible
-  display: none
+  transition: opacity .5s ease
+  opacity: 0
 
 .trans-demo
   display: flex
@@ -524,8 +555,11 @@ code, code[class*="language-"]
   width: calc(100% - 2em)
 
   .example
+    background-color: white
+    box-shadow: none
     height: 7em
-    margin: .5em .25em
+    padding: .5em
+    margin: .5em 0 //.25em
     min-width: 0
     width: 5em
 
@@ -546,11 +580,17 @@ code, code[class*="language-"]
 
 // DEMO: Basic Blending
 
+.quote-premul .linked-step-inactive
+.demo-blend-basic .subtitle .linked-step-inactive
 .demo-blend-basic .subtitle .linked-step-active:not(.linked-step-current)
   display: none
 
+.demo-blend-basic .subtitle strong
+  line-height: 1
+
 .demo-blend-basic .example
   background-color: white
+  box-shadow: none
   height: 1em
   min-width: 0
   padding: .5em
@@ -571,7 +611,7 @@ table.channels
   td.linked-step-inactive,
   th.linked-step-inactive
     display: table-cell;
-    visibility: hidden;
+    // visibility: hidden;
 
   code
     display: block
@@ -657,6 +697,10 @@ table.channels
 
 .demo-blend-gradient.funky .example.premul
   background-image: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(0, 0, 255, 0.2))
+
+.demo-blend-gradient .linked-step-inactive
+  display: none
+
 
 // DEMO: Logo
 

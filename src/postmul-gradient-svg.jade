@@ -2,7 +2,7 @@
 svg(xmlns="http://www.w3.org/2000/svg", style="background:white")
   desc Image of a color gradient
   defs
-    if useGreen
+    if useBlue
       linearGradient#nonpremul-alt2-gradient(x1=0, y1=0, x2="100%", y2=0)
         stop(offset="0%", stop-color="red")
         stop(offset="100%", stop-color="blue", stop-opacity="0.2")
@@ -10,7 +10,7 @@ svg(xmlns="http://www.w3.org/2000/svg", style="background:white")
       linearGradient#nonpremul-alt-gradient(x1=0, y1=0, x2="100%", y2=0)
         stop(offset="0%", stop-color="red", stop-opacity="0.5")
         stop(offset="100%", stop-color="black", stop-opacity="0")
-  if useGreen
+  if useBlue
     rect(width="100%", height="100%", fill="url(#nonpremul-alt2-gradient)")
   else
     rect(width="100%", height="100%", fill="url(#nonpremul-alt-gradient)")
