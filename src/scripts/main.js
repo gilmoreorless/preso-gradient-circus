@@ -66,6 +66,26 @@ function lerp(from, to, perc) {
   return (to - from) * perc + from;
 }
 
+function extend(base /* , args... */) {
+  var src, i;
+  for (i = 1; i < arguments.length; i++) {
+    src = arguments[i];
+    if (src) {
+      Object.keys(src).forEach(function (k) {
+        base[k] = src[k];
+      });
+    }
+  }
+  return base;
+}
+
+function createBlendGraph(canvas, baseOpts) {
+  return function (opts) {
+    var newOpts = extend({}, baseOpts, opts);
+    drawBlendGraph(canvas, newOpts);
+  };
+}
+
 function drawBlendGraph(canvas, opts) {
   var style = getComputedStyle(canvas);
   var width = canvas.width = parseInt(style.width, 10) || 100;
@@ -131,40 +151,57 @@ function drawBlendGraph(canvas, opts) {
   }
 
   // 50% marker line
-  // ctx.strokeStyle = 'hsl(240, 100%, 50%)';
-  // ctx.beginPath();
-  // ctx.moveTo(width / 2, 0);
-  // ctx.lineTo(width / 2, height);
-  // ctx.stroke();
+  if (opts.showMarker) {
+    ctx.strokeStyle = 'hsl(240, 100%, 50%)';
+    ctx.beginPath();
+    ctx.moveTo(width / 2, 0);
+    ctx.lineTo(width / 2, height);
+    ctx.stroke();
+  }
 }
 drawBlendGraph.defs = {
   post: {from: [1, 0.5], to: [0, 0]},
   pre: {from: [0.5, 0.5], to: [0, 0]},
   post2: {from: [1, 1], to: [0, 0.2]},
   pre2: {from: [1, 1], to: [0, 0.2]},
+  post3: {from: [0, 1], to: [1, 0.2]},
+  pre3: {from: [0, 1], to: [0.2, 0.2]},
 };
 drawBlendGraph.colours = {
   red: {source: 'hsl(0, 100%, 50%)', bg: 'hsl(0, 100%, 80%)', sourcePost: 'hsl(0, 80%, 20%)'},
+  blue: {source: 'hsl(240, 90%, 70%)', bg: 'hsl(240, 90%, 80%)', sourcePost: 'hsl(240, 60%, 20%)'},
   alpha: {source: '#666'}
 };
-each.call(document.querySelectorAll('.demo-blend-gradient canvas'), function (canvas) {
-  var defsId = canvas.getAttribute('data-defs');
-  if (!defsId) {
-    return;
-  }
-  var defBits = defsId.split('-');
-  var defValues = drawBlendGraph.defs[defBits[0]];
-  if (!defValues) {
-    return;
-  }
-  var isPremul = defBits[0].substr(0, 3) === 'pre';
-  var colour = drawBlendGraph.colours[defBits[1]];
+each.call(document.querySelectorAll('.demo-blend-gradient'), function (container) {
+  var graphs = [];
 
-  drawBlendGraph(canvas, {
-    type: defBits[1],
-    colour: colour,
-    isPremul: isPremul,
-    defs: defValues
+  each.call(container.querySelectorAll('canvas'), function (canvas) {
+    var defsId = canvas.getAttribute('data-defs');
+    if (!defsId) {
+      return;
+    }
+    var defBits = defsId.split('-');
+    var defValues = drawBlendGraph.defs[defBits[0]];
+    if (!defValues) {
+      return;
+    }
+    var isPremul = defBits[0].substr(0, 3) === 'pre';
+    var colour = drawBlendGraph.colours[defBits[1]];
+
+    var graph = createBlendGraph(canvas, {
+      type: defBits[1],
+      colour: colour,
+      isPremul: isPremul,
+      defs: defValues
+    });
+    graphs.push(graph);
+    graph();
+
+    canvas.addEventListener('click', function () {
+      graphs.forEach(function (draw) {
+        draw({showMarker: true});
+      });
+    }, false);
   });
 });
 
@@ -185,7 +222,9 @@ var linkedBullets = require('./plugin-linked-steps');
 // Grand finale
 var generateLogo = require('./generate-logo');
 var logoHolder = document.querySelector('.demo-logo .showcase-target');
-generateLogo(logoHolder);
+if (!logoHolder.classList.contains('redacted')) {
+  generateLogo(logoHolder);
+}
 
 // Background image layering demos
 var bgImageShowcase = require('./bgimage-showcase');

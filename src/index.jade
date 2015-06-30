@@ -289,7 +289,7 @@ html
         h3.wtf(data-linked-step=2) Simple, right?
 
       section.demo-blend-basic(data-bespoke-hash='blending-basic')
-        h2 Let’s try again
+        h2 Let’s try again &mdash; Blending 101
         p.subtitle
           span(data-linked-step=0) Blending partly-transparent red on a white background.
           span(data-linked-step=1) 1. Multiply source by the alpha value.
@@ -346,11 +346,14 @@ html
         .demo-holder(data-linked-step=1)
           table.channels
             tr.examples
-              td
+              td.colour-def
+                code rgba(255, 0,<br>0, 0.5)
               td
                 .example.postmul
                   include postmul-gradient-svg
                 .example.premul
+              td.colour-def
+                code rgba(0, 0,<br>0, 0)
             tr.title
               td
               td: h4 Normal
@@ -381,18 +384,24 @@ html
         .demo-holder(data-linked-step=1)
           table.channels
             tr.examples
-              td
+              td.colour-def
+                code rgba(255, 0,<br>0, 1)
               td
                 .example.postmul
                   - var useBlue = true
                   include postmul-gradient-svg
                 .example.premul
+              td.colour-def
+                code rgba(0, 0,<br>255, 0.2)
             tr.title
               td
               td: h4 Normal
             tr.channel-red
               td.channel-name R
               td.channel-graph: canvas(data-defs='post2-red')
+            //- tr.channel-blue
+            //-   td.channel-name B
+            //-   td.channel-graph: canvas(data-defs='post3-blue')
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-defs='post2-alpha')
@@ -402,6 +411,9 @@ html
             tr.channel-red
               td.channel-name R
               td.channel-graph: canvas(data-defs='pre2-red')
+            //- tr.channel-blue
+            //-   td.channel-name B
+            //-   td.channel-graph: canvas(data-defs='pre3-blue')
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-defs='pre2-alpha')
@@ -414,6 +426,7 @@ html
       section.demo-logo.no-zoom(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='this-is-the-last-slide')
         .showcase-container
           .showcase-target(data-showcase-start-mode='exploded', data-showcase-timing='slow')
+          //- .showcase-target.redacted(data-showcase-start-mode='3d-expanded')
         h2 Thanks, SydCSS!
         h4 @iamnotyourbroom
         
