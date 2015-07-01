@@ -73,6 +73,11 @@ html
         p Gradient Inspector &mdash; <a href="https://chrome.google.com/webstore/detail/css-gradient-inspector/blklpjonlhpakchaahdnkcjkfmccmdik">Chrome Extension</a>
         p: img(src='images/gradient-inspector.png')
 
+      section(data-bespoke-hash='placeholders')
+        h2 Placeholders
+        p Gradify &mdash; <a href="http://www.gradifycss.com/">gradifycss.com</a>
+        p: video(src='images/gradifycss.mov' loop data-autoplay-slide)
+
       section(data-bespoke-state='grey-area', data-bespoke-hash='animation')
         h2 Background animation
         p Bit of a grey area
@@ -137,7 +142,7 @@ html
       section(data-bespoke-hash='do-you-really')
         h2 Do you really understand?
         p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
-        p: video(src='images/pbrosset-medium.mov')
+        p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
 
       section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
         p: video(src='images/pbrosset-codepen.mov')
@@ -254,7 +259,7 @@ html
           .trans-list
             .wrapper
               h3(data-linked-step=1) Old spec
-              h4(data-linked-step=1) Normal colour
+              h4(data-linked-step=1) “Normal”<br>colour
               ul(data-linked-step=2)
                 li Safari
                 li Canvas

@@ -158,3 +158,20 @@ document.addEventListener('keyup', function (e) {
   }
 }, false);
 
+// Autoplay videos
+var autostop = {};
+
+deck.on('activate', function (event) {
+  var video = event.slide.querySelector('video[data-autoplay-slide]');
+  if (video) {
+    video.play();
+    autostop[event.index] = video;
+  }
+});
+deck.on('deactivate', function (event) {
+  if (autostop[event.index]) {
+    autostop[event.index].pause();
+    delete autostop[event.index];
+  }
+});
+

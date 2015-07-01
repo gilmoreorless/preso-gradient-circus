@@ -86,12 +86,78 @@ function drawBlendGraph(canvas, opts) {
     ctx.stroke();
   }
 
+  var w2 = width / 2;
+
+  // Show numeric details
+  if (opts.showDetails) {
+    // Clear the right half of the graph
+    ctx.clearRect(w2 + 1, 0, w2, height);
+
+    col = lerp(from[defIdx], to[defIdx], 0.5);
+    alpha = lerp(from[1], to[1], 0.5);
+    ctx.save();
+
+    var markLine = function (lineOpts) {
+      var y = yPos(lineOpts.value) + 0.5;
+      var y2 = y;
+      var lineLength = 30;
+      var fontSize = 10;
+      if (y2 - fontSize / 2 < 0) {
+        y2 += fontSize;
+      }
+
+      ctx.strokeStyle = ctx.fillStyle = lineOpts.colour;
+      ctx.font = fontSize + 'px sans-serif';
+
+      // Line out from area
+      ctx.beginPath();
+      ctx.moveTo(w2, y);
+      ctx.lineTo(w2 + lineLength, y2);
+      ctx.stroke();
+
+      // Text
+      var text = lineOpts.name + ' = ' + (Math.round(lineOpts.value * 1000) / 1000);
+      // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      // ctx.shadowOffsetX = ctx.shadowOffsetY = 1;
+      // ctx.strokeStyle = '#000';
+      // ctx.strokeText(text, w2 + lineLength + 3, y2 + fontSize / 2 - 2);
+      ctx.fillText(text, w2 + lineLength + 3, y2 + fontSize / 2 - 2);
+    };
+    markLine({
+      value: col,
+      colour: opts.colour.source,
+      name: opts.type.toUpperCase()
+    });
+    if (opts.type !== 'alpha') {
+      if (opts.isPremul) {
+        y = col + (1 - alpha);
+      } else {
+        y = (col * alpha) + (1 - alpha);
+      }
+      markLine({
+        value: y,
+        colour: opts.colour.source,
+        name: 'SRC + BG'
+      });
+
+      if (!opts.isPremul) {
+        markLine({
+          value: col * alpha,
+          colour: opts.colour.sourcePost,
+          name: opts.type.toUpperCase() + ' * ALPHA'
+        });
+      }
+    }
+
+    ctx.restore();
+  }
+
   // 50% marker line
   if (opts.showMarker) {
     ctx.strokeStyle = 'hsl(240, 100%, 50%)';
     ctx.beginPath();
-    ctx.moveTo(width / 2, 0);
-    ctx.lineTo(width / 2, height);
+    ctx.moveTo(w2 + 0.5, 0);
+    ctx.lineTo(w2 + 0.5, height);
     ctx.stroke();
   }
 }
@@ -139,8 +205,16 @@ function setupGraphs(selector) {
 
       canvas.addEventListener('click', function () {
         graphs.forEach(function (draw) {
-          draw({showMarker: true});
+          if (!graphs.isAlt) {
+            draw({
+              showMarker: true,
+              showDetails: true
+            });
+          } else {
+            draw();
+          }
         });
+        graphs.isAlt = !graphs.isAlt;
       }, false);
     });
   });
