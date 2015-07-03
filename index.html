@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Gradient Circus</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section data-bespoke-state="preamble" data-bespoke-hash="preamble" class="preamble">
+        <h2>Hi there</h2>
+        <p>Welcome to this slide deck, built for a presentation at <a href="http://sydcss.com/">SydCSS</a> in July 2015.</p>
+        <p>Before you go browsing these slides, here are some things you should know:</p>
+        <ul>
+          <li>
+            This deck was built and tested for use in one browser (Chrome) running on one machine (mine).
+            Any other combination has no guarantees of working as expected.
+          </li>
+          <li>Use left/right arrow keys or spacebar to navigate the slides.</li>
+          <li>
+            Some slides have interactive content.
+            Extra instructions have been added to these slides <span class="instructions-preview">in this style</span>.
+          </li>
+          <li>Source code for the slides is <a href="https://github.com/gilmoreorless/sydcss-preso-gradient-circus">on GitHub</a>.</li>
+        </ul>
+        <p>You may proceed when ready.</p>
+        <p class="go-go-gadget-slides">☞</p>
+      </section>
+      <section data-bespoke-hash="intro" class="intro">
+        <h2>Who’s this bozo?<img src="images/bozo.png"></h2>
+        <ul>
+          <li><a href="https://twitter.com/iamnotyourbroom">@iamnotyourbroom</a></li>
+          <li><a href="https://shoehornwithteeth.com/">shoehornwithteeth.com</a></li>
+          <li>Web tinkerer</li>
+        </ul>
+      </section>
+      <section data-bespoke-hash="seuss" class="middle"><img src="images/If-I-ran-the-circus.jpg" height="70%"></section>
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="gradient-circus">
+        <h1>Gradient Circus</h1>
+      </section>
+      <section data-bespoke-hash="types">
+        <h2>Types of gradients</h2>
+        <ul class="gradient-gallery">
+          <li class="linear"><span class="example"></span><code>linear-gradient</code></li>
+          <li class="radial"><span class="example"></span><code>radial-gradient</code></li>
+          <li class="repeating-linear"><span class="example"></span><code>repeating-linear-gradient</code></li>
+          <li class="repeating-radial"><span class="example"></span><code>repeating-radial-gradient</code></li>
+        </ul>
+      </section>
+      <section data-bespoke-hash="support">
+        <h2>Support</h2>
+        <p><a href="http://caniuse.com/#feat=css-gradients">No prefixes needed!</a></p>
+        <p><img src="images/caniuse-gradients.png"></p>
+      </section>
+      <!-- ACT I-->
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="act-i-tips">
+        <h1>Act I</h1>
+        <h2>Tips and tricks</h2>
+      </section>
+      <section data-bespoke-hash="patterns" class="patterns">
+        <h2>Patterns</h2>
+        <div data-linked-step='0' class="single-bullet">
+          <p>Gradients only &mdash; <a href="http://lea.verou.me/css3patterns/">lea.verou.me/css3patterns</a></p>
+          <p><img src="images/gradient-gallery-lea.png"></p>
+        </div>
+        <div data-linked-step='1' class="single-bullet">
+          <p>Gradients + blend modes &mdash; <a href="http://bennettfeely.com/gradients/">bennettfeely.com/gradients</a></p>
+          <p><img src="images/gradient-gallery-bennett.png"></p>
+        </div>
+      </section>
+      <section data-bespoke-hash="pictures">
+        <h2>Pictures</h2>
+        <p>A single div &mdash; <a href="http://a.singlediv.com/">a.singlediv.com</a></p>
+        <p><img src="images/gradient-gallery-asinglediv.png"></p>
+      </section>
+      <section data-bespoke-hash="debugging">
+        <h2>Debugging</h2>
+        <p>Gradient Inspector &mdash; <a href="https://chrome.google.com/webstore/detail/css-gradient-inspector/blklpjonlhpakchaahdnkcjkfmccmdik">Chrome Extension</a></p>
+        <p><img src="images/gradient-inspector.png"></p>
+      </section>
+      <section data-bespoke-hash="placeholders">
+        <h2>Placeholders</h2>
+        <p>Gradify &mdash; <a href="http://www.gradifycss.com/">gradifycss.com</a></p>
+        <p><img src="images/gradifycss-1.jpg" data-swap-src="images/gradifycss-2.jpg" data-swap-time='3'></p>
+      </section>
+      <section data-bespoke-state="grey-area" data-bespoke-hash="animation">
+        <h2>Background animation</h2>
+        <p>Bit of a grey area</p>
+        <ul>
+          <li>One spec says <strong>no</strong></li>
+          <li>One spec says <strong>yes</strong></li>
+          <li>Browsers say <strong>um, maybe&hellip;?</strong></li>
+        </ul>
+        <table data-linked-step='1' class="anim-support">
+          <tr>
+            <th></th>
+            <th>Cross-fade pictures</th>
+            <th>Transition gradients</th>
+          </tr>
+          <tr>
+            <th>Chrome</th>
+            <td>✔</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th>Safari</th>
+            <td>✔</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th>IE / Edge</th>
+            <td>-</td>
+            <td>✔</td>
+          </tr>
+          <tr>
+            <th>Firefox</th>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </table>
+      </section>
+      <section data-bespoke-hash="future">
+        <h2>The future</h2>
+        <p><a href="http://dev.w3.org/csswg/css-images-4/">CSS Images Level 4</a> &mdash; Nowhere near finished</p>
+        <p>Among other things, it has&hellip;</p>
+        <h3>Conic gradients</h3>
+        <div class="conic-comparison">
+          <div data-linked-step='1' class="no">
+            <p>Not this</p>
+            <div class="example"><img src="images/harry.jpg"></div>
+          </div>
+          <div data-linked-step='2' class="yes">
+            <p>This</p>
+            <div class="example"></div>
+          </div>
+        </div>
+      </section>
+      <section data-bespoke-hash="future-today">
+        <h2>The future &ndash; today</h2>
+        <p><em>Obligatory slide about Lea Verou</em></p>
+        <ul>
+          <li>From <a href="http://lea.verou.me/specs/conical-gradient/">rough spec</a> to <a href="http://www.w3.org/TR/css4-images/#conic-gradients">proper spec</a></li>
+          <li>Polyfill: <a href="https://leaverou.github.io/conic-gradient/">leaverou.github.io/conic-gradient</a></li>
+          <li>Use it, promote it, harass browsers for support</li>
+        </ul>
+        <div class="conic-comparison conic-demos">
+          <div class="conic-demo-1">
+            <div class="example"></div>
+          </div>
+          <div class="conic-demo-2">
+            <div class="example"></div>
+          </div>
+          <div class="conic-demo-3">
+            <div class="example"></div>
+          </div>
+        </div>
+      </section>
+      <!-- ACT II-->
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="act-ii-angles">
+        <h1>Act II</h1>
+        <h2>Linear gradient angles</h2>
+      </section>
+      <section data-bespoke-hash="do-you-really">
+        <h2>Do you really understand?</h2>
+        <p><a href="https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf">Patrick Brosset on Medium</a></p>
+        <p><img src="images/pbrosset-medium.jpg"></p>
+      </section>
+      <section data-bespoke-state="middle" data-bespoke-hash="linear-angles">
+        <p><img src="images/pbrosset-codepen.gif"></p>
+      </section>
+      <!-- ACT III-->
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="act-iii-layering">
+        <h1>Act III</h1>
+        <h2>Background image layering</h2>
+      </section>
+      <section data-bgimage-showcase data-bespoke-state="showcase" data-bespoke-hash="layering" class="demo-layering">
+        <h2>Images from the top, then colour</h2>
+        <p>Remember, gradients are just images</p>
+        <div class="code-steps">
+          <div class="code-steps-code">
+            <pre><code class="language-css">background-color:
+  skyblue;
+background-image:
+  url(...),
+  linear-gradient(...),
+  radial-gradient(...);</code></pre>
+          </div>
+          <div class="code-steps-info">
+            <div class="showcase-container">
+              <div class="showcase-target"></div>
+            </div>
+          </div>
+        </div>
+        <p class="instructions">Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image</p>
+      </section>
+      <section data-bgimage-showcase data-bespoke-state="showcase" data-bespoke-hash="positioning" class="demo-positioning">
+        <h2>Images from the top, then colour</h2>
+        <div class="code-steps">
+          <div class="code-steps-code">
+            <pre><code class="language-css">background-repeat:
+  no-repeat;
+background-size:
+  60% 100%;
+background-position:
+  100% 0,
+  0 0;
+background-image:
+  radial-gradient(...),
+  radial-gradient(...);</code></pre>
+          </div>
+          <div class="code-steps-info">
+            <div class="showcase-container">
+              <div class="showcase-target"></div>
+            </div>
+          </div>
+        </div>
+        <p class="instructions">Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image</p>
+      </section>
+      <!-- ACT IV-->
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="act-iv-colour">
+        <h1>Act IV</h1>
+        <h2>Colour calculations</h2>
+      </section>
+      <section data-bespoke-hash="colour-interpolation" class="demo-colour-calcs">
+        <h2>A basic example</h2>
+        <div style="background:linear-gradient(to right, hsl(220, 90%, 50%), hsl(0, 90%, 60%));" class="example">
+          <div data-linked-step='4' style="color: rgba(129, 75, 152, 1)" class="marker"></div>
+        </div>
+        <div class="code-steps">
+          <div class="code-steps-code">
+            <pre data-linked-step='1' class="language-"><code class="language-">linear-gradient(
+  to right,
+  <span data-code-colour>hsl(220, 90%, 50%)</span>,
+  <span data-code-colour>hsl(0, 90%, 60%)</span>
+</span>);</code></pre>
+            <pre data-linked-step='2' class="language-"><code class="language-">linear-gradient(
+  to right,
+  <span data-code-colour>rgba(13, 89, 242, 1)</span>,
+  <span data-code-colour>rgba(245, 61, 61, 1)</span>
+</span>);</code></pre>
+            <pre data-linked-step='3' class="language-"><code class="language-">linear-gradient(
+  to right,
+  <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
+<span class="code-comment">/*      ↓   ↓    ↓   ↓ */</span>
+  <span data-code-colour>rgba(245, 61,  61, 1)</span>
+</span>);</code></pre>
+            <pre data-linked-step='4' class="language-"><code class="language-">linear-gradient(
+  to right,
+  <span data-code-colour>rgba( 13, 89, 242, 1)</span>,
+<span class="code-comment">/*      ↓   ↓    ↓   ↓ </span>
+  <span data-code-colour>rgba(129, 75, 152, 1)</span>
+<span class="code-comment">        ↓   ↓    ↓   ↓ */</span>
+  <span data-code-colour>rgba(245, 61,  61, 1)</span>
+</span>);</code></pre>
+          </div>
+          <ol class="code-steps-info">
+            <li data-linked-step='1'>A simple gradient</li>
+            <li data-linked-step='2'>Convert to RGBA</li>
+            <li data-linked-step='3'>Interpolate each channel separately</li>
+            <li data-linked-step='4'>Example at 50%</li>
+          </ol>
+        </div>
+      </section>
+      <section data-bespoke-hash="transparency" class="demo-transparency">
+        <h2>Transparency</h2>
+        <p><code>transparent == rgba(0, 0, 0, 0)</code>
+          <div class="step-container">
+            <pre data-linked-step='3' class="language-"><code class="language-">linear-gradient(red, rgba(255,0,0,0) 50%,
+                     rgba(0,0,255,0) 50%, blue);</code></pre>
+            <pre class="language- hide-when-previous-visible"><code class="language-">linear-gradient(red, transparent, blue);
+
+</code></pre>
+          </div>
+        </p>
+        <div class="trans-demo">
+          <div class="trans-list">
+            <div class="wrapper">
+              <h3 data-linked-step='1'>Old spec</h3>
+              <h4 data-linked-step='1'>“Normal”<br>colour</h4>
+              <ul data-linked-step='2'>
+                <li>Safari</li>
+                <li>Canvas</li>
+                <li>SVG</li>
+              </ul>
+            </div>
+          </div>
+          <div class="example">
+            <svg xmlns="http://www.w3.org/2000/svg">
+              <desc>Image of a color gradient</desc>
+              <defs>
+                <linearGradient id="nonpremul-gradient" x1="0" y1="0" x2="0" y2="100%">
+                  <stop offset="0%" stop-color="red"></stop>
+                  <stop offset="50%" stop-color="black" stop-opacity="0"></stop>
+                  <stop offset="100%" stop-color="blue"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#nonpremul-gradient)"></rect>
+            </svg>
+          </div>
+          <div class="example">
+            <svg xmlns="http://www.w3.org/2000/svg">
+              <desc>Image of a color gradient</desc>
+              <defs>
+                <linearGradient id="premul-gradient" x1="0" y1="0" x2="0" y2="100%">
+                  <stop offset="0%" stop-color="red"></stop>
+                  <stop offset="50%" stop-color="red" stop-opacity="0"></stop>
+                  <stop offset="50%" stop-color="blue" stop-opacity="0"></stop>
+                  <stop offset="100%" stop-color="blue"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#premul-gradient)"></rect>
+            </svg>
+          </div>
+          <div class="trans-list">
+            <h3 data-linked-step='1'>New spec</h3>
+            <h4 data-linked-step='1'>Pre-multiplied alpha</h4>
+            <ul data-linked-step='2'>
+              <li>Chrome</li>
+              <li>Firefox</li>
+              <li>IE / Edge</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section data-bespoke-hash="premultiplied-alpha" class="quote-premul">
+        <h2>Pre-whatified what now?</h2>
+        <p>Pre-multiplied alpha &ndash; keeping <code>transparent</code> pretty</p>
+        <blockquote data-linked-step='1' class="single-bullet">
+          <p>The formula for simple alpha compositing is</p><code>co = Cs x αs + Cb x αb x (1 - αs)</code>
+          <p>Where</p>
+          <ul>
+            <li><code>co</code>: the premultiplied pixel value after compositing</li>
+            <li><code>Cs</code>: the color value of the source graphic element being composited</li>
+            <li><code>αs</code>: the alpha value of the source graphic element being composited</li>
+            <li><code>Cb</code>: the color value of the backdrop</li>
+            <li><code>αb</code>: the alpha value of the backdrop</li>
+          </ul>
+          <cite><a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a></cite>
+        </blockquote>
+        <h3 data-linked-step='2' class="wtf">Simple, right?</h3>
+      </section>
+      <section data-bespoke-hash="blending-basic" class="demo-blend-basic">
+        <h2>Let’s try again &mdash; Blending 101</h2>
+        <p class="subtitle"><span data-linked-step='0'>Blending partly-transparent red on a white background.</span><span data-linked-step='1'>1. Multiply source by the alpha value.</span><span data-linked-step='2'>2. Multiply background by the <strong>inverse</strong> source alpha value.</span><span data-linked-step='3'>3. Add them together</span></p>
+        <div class="example"><span></span></div>
+        <div class="demo-holder">
+          <table class="channels">
+            <tr>
+              <th></th>
+              <th colspan="2"><code>source<br>&nbsp;<span class="highlight" data-linked-step="1">&times; 0.6</span></code></th>
+              <th colspan="2"><code>+ destination<br>&nbsp;<span class="highlight" data-linked-step="2">&times; 0.4</span></code></th>
+              <th colspan="2" data-linked-step='3'><code>= output<br><span class="highlight">&nbsp;</span></code></th>
+            </tr>
+            <tr class="channel-red">
+              <td class="channel-name">R</td>
+              <td data-type="source"><code></code></td>
+              <td data-type="source">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="dest"><code></code></td>
+              <td data-type="dest">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="output" data-linked-step='3'><code></code></td>
+              <td data-type="output" data-linked-step='3'>
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+            </tr>
+            <tr class="channel-green">
+              <td class="channel-name">G</td>
+              <td data-type="source"><code></code></td>
+              <td data-type="source">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="dest"><code></code></td>
+              <td data-type="dest">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="output" data-linked-step='3'><code></code></td>
+              <td data-type="output" data-linked-step='3'>
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+            </tr>
+            <tr class="channel-blue">
+              <td class="channel-name">B</td>
+              <td data-type="source"><code></code></td>
+              <td data-type="source">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="dest"><code></code></td>
+              <td data-type="dest">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="output" data-linked-step='3'><code></code></td>
+              <td data-type="output" data-linked-step='3'>
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+            </tr>
+            <tr class="channel-alpha">
+              <td class="channel-name">A</td>
+              <td data-type="source"><code></code></td>
+              <td data-type="source">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="dest"><code></code></td>
+              <td data-type="dest">
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+              <td data-type="output" data-linked-step='3'><code></code></td>
+              <td data-type="output" data-linked-step='3'>
+                <div class="channel-meter">
+                  <div class="channel-fill"></div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+      <section data-bespoke-hash="blending-gradients" class="demo-blend-gradient">
+        <h2>Now back to gradients</h2>
+        <blockquote data-linked-step='0' class="single-bullet">
+          <p>Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by</p><code>cs = Cs x αs</code>
+          <cite><a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a></cite>
+        </blockquote>
+        <div data-linked-step='1' class="demo-holder">
+          <table class="channels">
+            <tr class="examples">
+              <td class="colour-def"><code>rgba(255, 0,<br>0, 0.5)</code></td>
+              <td>
+                <div class="example postmul">
+                  <svg xmlns="http://www.w3.org/2000/svg" style="background:white">
+                    <desc>Image of a color gradient</desc>
+                    <defs>
+                      <linearGradient id="nonpremul-alt-gradient" x1="0" y1="0" x2="100%" y2="0">
+                        <stop offset="0%" stop-color="red" stop-opacity="0.5"></stop>
+                        <stop offset="100%" stop-color="black" stop-opacity="0"></stop>
+                      </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#nonpremul-alt-gradient)"></rect>
+                  </svg>
+                </div>
+                <div class="example premul"></div>
+              </td>
+              <td class="colour-def"><code>rgba(0, 0,<br>0, 0)</code></td>
+            </tr>
+            <tr class="title">
+              <td></td>
+              <td>
+                <h4>Normal</h4>
+              </td>
+            </tr>
+            <tr class="channel-red">
+              <td class="channel-name">R</td>
+              <td class="channel-graph">
+                <canvas data-defs="post-red"></canvas>
+              </td>
+            </tr>
+            <tr class="channel-alpha">
+              <td class="channel-name">A</td>
+              <td class="channel-graph">
+                <canvas data-defs="post-alpha"></canvas>
+              </td>
+            </tr>
+            <tr class="title">
+              <td></td>
+              <td>
+                <h4>Pre-multiplied</h4>
+              </td>
+            </tr>
+            <tr class="channel-red">
+              <td class="channel-name">R</td>
+              <td class="channel-graph">
+                <canvas data-defs="pre-red"></canvas>
+              </td>
+            </tr>
+            <tr class="channel-alpha">
+              <td class="channel-name">A</td>
+              <td class="channel-graph">
+                <canvas data-defs="pre-alpha"></canvas>
+              </td>
+            </tr>
+          </table>
+          <p class="instructions">Click the graphs for extra details</p>
+        </div>
+      </section>
+      <section data-bespoke-hash="blending-side-effects" class="demo-blend-gradient funky">
+        <h2>Funky side effects</h2>
+        <blockquote data-linked-step='0' class="single-bullet">
+          <p>Thus the formula for simple alpha compositing using pre-multiplied values becomes</p><code>co = cs + cb x (1 - αs)</code>
+          <p>To extract the color component of a pre-multiplied value, the formula is reversed:</p><code>Co = co / αo</code>
+          <cite><a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a></cite>
+        </blockquote>
+        <div data-linked-step='1' class="demo-holder">
+          <table class="channels">
+            <tr class="examples">
+              <td class="colour-def"><code>rgba(255, 0,<br>0, 1)</code></td>
+              <td>
+                <div class="example postmul">
+                  <svg xmlns="http://www.w3.org/2000/svg" style="background:white">
+                    <desc>Image of a color gradient</desc>
+                    <defs>
+                      <linearGradient id="nonpremul-alt2-gradient" x1="0" y1="0" x2="100%" y2="0">
+                        <stop offset="0%" stop-color="red"></stop>
+                        <stop offset="100%" stop-color="blue" stop-opacity="0.2"></stop>
+                      </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#nonpremul-alt2-gradient)"></rect>
+                  </svg>
+                </div>
+                <div class="example premul"></div>
+              </td>
+              <td class="colour-def"><code>rgba(0, 0,<br>255, 0.2)</code></td>
+            </tr>
+            <tr class="title">
+              <td></td>
+              <td>
+                <h4>Normal</h4>
+              </td>
+            </tr>
+            <tr class="channel-red">
+              <td class="channel-name">R</td>
+              <td class="channel-graph">
+                <canvas data-defs="post2-red"></canvas>
+              </td>
+            </tr>
+            <tr class="channel-alpha">
+              <td class="channel-name">A</td>
+              <td class="channel-graph">
+                <canvas data-defs="post2-alpha"></canvas>
+              </td>
+            </tr>
+            <tr class="title">
+              <td></td>
+              <td>
+                <h4>Pre-multiplied</h4>
+              </td>
+            </tr>
+            <tr class="channel-red">
+              <td class="channel-name">R</td>
+              <td class="channel-graph">
+                <canvas data-defs="pre2-red"></canvas>
+              </td>
+            </tr>
+            <tr class="channel-alpha">
+              <td class="channel-name">A</td>
+              <td class="channel-graph">
+                <canvas data-defs="pre2-alpha"></canvas>
+              </td>
+            </tr>
+          </table>
+          <p class="instructions">Click the graphs for extra details</p>
+        </div>
+      </section>
+      <!-- FINALE-->
+      <section data-bespoke-state="title" data-bespoke-backdrop="title" data-bespoke-hash="grand-finale">
+        <h1>Grand Finale</h1>
+      </section>
+      <section data-bgimage-showcase data-bespoke-state="showcase" data-bespoke-hash="this-is-the-last-slide" class="demo-logo no-zoom">
+        <div class="showcase-container">
+          <div data-showcase-start-mode="exploded" data-showcase-timing="slow" class="showcase-target"></div>
+        </div>
+        <h2>Thanks, SydCSS!</h2>
+        <h4>@iamnotyourbroom</h4>
+        <p class="instructions">Use number keys<br><kbd>1</kbd> to <kbd>4</kbd><br>to change the image</p>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
