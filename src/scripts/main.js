@@ -197,7 +197,7 @@ deck.on('deactivate', function (event) {
 });
 
 // Analytics
-var _gaq = _gaq || [];
+var _gaq = window._gaq = _gaq || [];
 if (~location.hostname.indexOf('github.io')) {
   _gaq.push(['_setAccount', 'UA-8341018-3']);
   _gaq.push(['_trackPageview']);
