@@ -172,6 +172,9 @@ deck.on('activate', function (event) {
   if (img) {
     img.swapSrc1 = img.src;
     img.swapSrc2 = img.getAttribute('data-swap-src');
+    var cache = new Image();
+    cache.src = img.swapSrc2;
+
     var timeout = (parseInt(img.getAttribute('data-swap-time'), 10) || 1) * 1000;
     var timer = setInterval(function () {
       img.src = (img.src === img.swapSrc1) ? img.swapSrc2 : img.swapSrc1;
@@ -193,3 +196,15 @@ deck.on('deactivate', function (event) {
   }
 });
 
+// Analytics
+var _gaq = _gaq || [];
+if (~location.hostname.indexOf('github.io')) {
+  _gaq.push(['_setAccount', 'UA-8341018-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
