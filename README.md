@@ -5,7 +5,7 @@ View the slides at <http://gilmoreorless.github.io/sydcss-preso-gradient-circus>
 
 ## Links and references
 
-* [If I Ran the Circus](https://amazon.com/???), by Dr Seuss
+* [If I Ran the Circus](http://www.amazon.com/If-Ran-Circus-Classic-Seuss/dp/039480080X), by Dr Seuss
 * [Browser support for gradients](http://caniuse.com/#feat=css-gradients) at Can I use...
 * [Lea Verou’s CSS3 Patterns](http://lea.verou.me/css3patterns/)
 * [Bennett Feely’s gradient gallery](http://bennettfeely.com/gradients/)

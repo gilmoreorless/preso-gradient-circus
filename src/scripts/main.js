@@ -158,8 +158,9 @@ document.addEventListener('keyup', function (e) {
   }
 }, false);
 
-// Autoplay videos
+// Autoplay videos and image swaps
 var autostop = {};
+var swapping = {};
 
 deck.on('activate', function (event) {
   var video = event.slide.querySelector('video[data-autoplay-slide]');
@@ -167,11 +168,28 @@ deck.on('activate', function (event) {
     video.play();
     autostop[event.index] = video;
   }
+  var img = event.slide.querySelector('img[data-swap-src]');
+  if (img) {
+    img.swapSrc1 = img.src;
+    img.swapSrc2 = img.getAttribute('data-swap-src');
+    var timeout = (parseInt(img.getAttribute('data-swap-time'), 10) || 1) * 1000;
+    var timer = setInterval(function () {
+      img.src = (img.src === img.swapSrc1) ? img.swapSrc2 : img.swapSrc1;
+    }, timeout);
+
+    swapping[event.index] = {img: img, timer: timer};
+  }
 });
 deck.on('deactivate', function (event) {
   if (autostop[event.index]) {
     autostop[event.index].pause();
     delete autostop[event.index];
+  }
+  if (swapping[event.index]) {
+    clearInterval(swapping[event.index].timer);
+    var img = swapping[event.index].img;
+    img.src = img.swapSrc1;
+    delete swapping[event.index];
   }
 });
 

@@ -1,3 +1,5 @@
+- var withInstructions = true
+
 doctype html
 html
   head
@@ -10,6 +12,21 @@ html
   body
 
     article
+
+      if withInstructions
+        section.preamble(data-bespoke-state='preamble', data-bespoke-hash='preamble')
+          h2 Hi there
+          p Welcome to this slide deck, built for a presentation at <a href="http://sydcss.com/">SydCSS</a> in July 2015.
+          p Before you go browsing these slides, here are some things you should know:
+          ul
+            li This deck was built and tested for use in one browser (Chrome) running on one machine (mine).
+              | Any other combination has no guarantees of working as expected.
+            li Use left/right arrow keys or spacebar to navigate the slides.
+            li Some slides have interactive content.
+              | Extra instructions have been added to these slides <span class="instructions-preview">in this style</span>.
+            li Source code for the slides is <a href="https://github.com/gilmoreorless/sydcss-preso-gradient-circus">on GitHub</a>.
+          p You may proceed when ready.
+          p.go-go-gadget-slides ☞
 
       section.intro(data-bespoke-hash='intro')
         h2
@@ -76,7 +93,10 @@ html
       section(data-bespoke-hash='placeholders')
         h2 Placeholders
         p Gradify &mdash; <a href="http://www.gradifycss.com/">gradifycss.com</a>
-        p: video(src='images/gradifycss.mov' loop data-autoplay-slide)
+        if withInstructions
+          p: img(src='images/gradifycss-1.jpg', data-swap-src='images/gradifycss-2.jpg', data-swap-time=3)
+        else
+          p: video(src='images/gradifycss.mov', loop, data-autoplay-slide)
 
       section(data-bespoke-state='grey-area', data-bespoke-hash='animation')
         h2 Background animation
@@ -142,10 +162,16 @@ html
       section(data-bespoke-hash='do-you-really')
         h2 Do you really understand?
         p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
-        p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
+        if withInstructions
+          p: img(src='images/pbrosset-medium.jpg')
+        else
+          p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
 
       section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
-        p: video(src='images/pbrosset-codepen.mov')
+        if withInstructions
+          p: img(src='images/pbrosset-codepen.gif')
+        else
+          p: video(src='images/pbrosset-codepen.mov')
 
 
       // ACT III
@@ -170,6 +196,7 @@ html
           .code-steps-info
             .showcase-container
               .showcase-target
+        p.instructions Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image
 
       section.demo-positioning(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='positioning')
         h2 Images from the top, then colour
@@ -190,6 +217,8 @@ html
           .code-steps-info
             .showcase-container
               .showcase-target
+        p.instructions Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image
+
 
       // ACT IV
 
@@ -377,6 +406,7 @@ html
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-defs='pre-alpha')
+          p.instructions Click the graphs for extra details
 
       section.demo-blend-gradient.funky(data-bespoke-hash='blending-side-effects')
         h2 Funky side effects
@@ -422,6 +452,7 @@ html
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-defs='pre2-alpha')
+          p.instructions Click the graphs for extra details
 
       // FINALE
       
@@ -434,6 +465,7 @@ html
           //- .showcase-target.redacted(data-showcase-start-mode='3d-expanded')
         h2 Thanks, SydCSS!
         h4 @iamnotyourbroom
+        p.instructions Use number keys<br><kbd>1</kbd> to <kbd>4</kbd><br>to change the image
         
 
     script(src='build/build.js')
