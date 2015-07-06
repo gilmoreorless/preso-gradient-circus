@@ -37,10 +37,11 @@ bgImageShowcase.inspect = function (elem, options) {
 /*** INTERNAL UTILITES ***/
 
 function showcaseKeyHandler(e) {
+  var code = e.keyCode || e.charCode;
   if (
     bgImageShowcase._showcase &&
-    e.keyCode >= 49 &&  // Key = 1
-    e.keyCode <= 52 &&  // Key = 4
+    code >= 49 &&  // Key = 1
+    code <= 52 &&  // Key = 4
     !e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey  // No modifiers
   ) {
     var modes = {
@@ -49,7 +50,7 @@ function showcaseKeyHandler(e) {
       51: 'MODE_3D_EXPANDED',
       52: 'MODE_EXPLODED'
     };
-    bgImageShowcase._showcase.setMode(modes[e.keyCode]);
+    bgImageShowcase._showcase.setMode(modes[code]);
   }
 }
 
@@ -143,6 +144,26 @@ function parseStyles(computedStyle) {
   return images;
 }
 
+/**
+ * Not all browsers return shorthand property values in `getComputedStyle`
+ * This is a quick way to vaguely standardise the return value for `background`.
+ */
+function getBackgroundStyles(elem) {
+  var computed = window.getComputedStyle(elem);
+  var ret = {};
+  for (var key in computed) {
+    ret[key] = computed[key];
+  }
+  if (!ret.background) {
+    var props = ['Color', 'Image', 'Repeat', 'Attachment', 'Position', '/', 'Size', 'Origin', 'Clip'];
+    var values = props.map(function (prop) {
+      return prop === '/' ? '/' : ret['background' + prop];
+    });
+    ret.background = values.join(' ');
+  }
+  return ret;
+}
+
 function buildExploded() {
   this.container.style.width = this.dims.width;
   this.container.style.height = this.dims.height;
@@ -233,7 +254,7 @@ Showcase.prototype.setup = function () {
 
 Showcase.prototype.refresh = function () {
   // Inspect the element's gradient
-  var style = getComputedStyle(this.source);
+  var style = getBackgroundStyles(this.source);
   if (style.background !== this._style) {
     this._style = style.background;
     this.dims = {
