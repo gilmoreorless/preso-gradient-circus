@@ -22,6 +22,10 @@ View the slides at <http://gilmoreorless.github.io/sydcss-preso-gradient-circus>
 * [W3C: Compositing and Blending Level 1](http://dev.w3.org/fxtf/compositing-1/)
 * [Lea Verou’s draft conic gradient spec](http://lea.verou.me/specs/conical-gradient/)
 
+### Demos
+
+* [How background image layering works](http://ecssplain.github.io/background-image-layers/) (standalone demo extracted from this presentation, [plus source code](https://github.com/ecssplain/background-image-layers))
+
 
 ## Slide tech
 
