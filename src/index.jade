@@ -1,4 +1,5 @@
-- var withInstructions = true
+- var withInstructions = false
+- var bodyClass = withInstructions ? 'has-instructions' : '';
 
 doctype html
 html
@@ -9,7 +10,7 @@ html
 
     link(rel='stylesheet', type='text/css', href='build/build.css')
 
-  body
+  body(class=bodyClass)
 
     article
 
