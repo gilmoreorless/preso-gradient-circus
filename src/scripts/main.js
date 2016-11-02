@@ -73,6 +73,62 @@ if (!logoHolder.classList.contains('redacted')) {
   generateLogo(logoHolder);
 }
 
+// "Deep dive" images that open iframes
+var body = document.body;
+var frameHolder = document.createElement('div');
+frameHolder.className = 'deep-dive-frame-holder';
+body.appendChild(frameHolder);
+
+var ret = document.createElement('a');
+ret.className = 'deep-dive-return';
+ret.addEventListener('click', hideDeepDive, false);
+frameHolder.appendChild(ret);
+
+function showDeepDive(iframe) {
+  body.classList.add('show-sub-frame');
+  iframe.classList.add('visible');
+}
+
+function hideDeepDive() {
+  body.classList.remove('show-sub-frame');
+  setTimeout(function () {
+    each.call(frameHolder.querySelectorAll('.visible'), function (frame) {
+      frame.classList.remove('visible');
+    });
+  }, 1500);
+}
+
+document.addEventListener('keyup', function (e) {
+  if (e.keyCode === 27) { // Escape
+    hideDeepDive();
+  }
+}, true);
+
+each.call(document.querySelectorAll('img[data-href]'), function (img) {
+  var href = img.getAttribute('data-href');
+
+  // Wrap the image with a link
+  var a = document.createElement('a');
+  a.className = 'deep-dive-link';
+  a.href = href;
+  img.parentNode.insertBefore(a, img);
+  a.appendChild(img);
+
+  // Create an iframe
+  var iframe = document.createElement('iframe');
+  iframe.onload = function () {
+    console.log('LOADED', iframe);
+  };
+  iframe.src = href;
+  iframe.className = 'deep-dive-frame';
+  frameHolder.appendChild(iframe);
+
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    showDeepDive(iframe);
+  }, false);
+});
+
 
 // Default bespoke plugins
 var bespoke = require('bespoke'),
