@@ -84,7 +84,7 @@ html
       section(data-bespoke-hash='pictures')
         h2 Pictures
         p A single div &mdash; <a href="http://a.singlediv.com/">a.singlediv.com</a>
-        p: img(src='images/gradient-gallery-asinglediv.png')
+        p: img(src='images/gradient-gallery-asinglediv.png', data-href='http://a.singlediv.com/')
 
       section(data-bespoke-hash='debugging')
         h2 Debugging
@@ -97,7 +97,7 @@ html
         if withInstructions
           p: img(src='images/gradifycss-1.jpg', data-swap-src='images/gradifycss-2.jpg', data-swap-time=3)
         else
-          p: video(src='images/gradifycss.mov', loop, data-autoplay-slide)
+          p: video(src='images/gradifycss.mov', loop, data-autoplay-slide, data-href='http://www.gradifycss.com/')
 
       section(data-bespoke-state='grey-area', data-bespoke-hash='animation')
         h2 Background animation
@@ -170,9 +170,9 @@ html
 
       section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
         if withInstructions
-          p: img(src='images/pbrosset-codepen.gif')
+          p: img(src='images/pbrosset-codepen.gif', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
         else
-          p: video(src='images/pbrosset-codepen.mov')
+          p: video(src='images/pbrosset-codepen.mov', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
 
 
       // ACT III

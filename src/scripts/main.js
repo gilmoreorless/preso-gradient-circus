@@ -104,7 +104,7 @@ document.addEventListener('keyup', function (e) {
   }
 }, true);
 
-each.call(document.querySelectorAll('img[data-href]'), function (img) {
+each.call(document.querySelectorAll('[data-href]'), function (img) {
   var href = img.getAttribute('data-href');
 
   // Wrap the image with a link
