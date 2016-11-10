@@ -86,6 +86,11 @@ html
         p A single div &mdash; <a href="http://a.singlediv.com/">a.singlediv.com</a>
         p: img(src='images/gradient-gallery-asinglediv.png', data-href='http://a.singlediv.com/')
 
+      section(data-bespoke-hash='themes')
+        h2 Themes
+        p Blatant self promotion &mdash; <a href="https://gilmoreorless.github.io/">gilmoreorless.github.io</a>
+        p: img(src='images/gradient-gallery-gilmoreorless.png', data-href='https://gilmoreorless.github.io/')
+
       section(data-bespoke-hash='debugging')
         h2 Debugging
         p Gradient Inspector &mdash; <a href="https://chrome.google.com/webstore/detail/css-gradient-inspector/blklpjonlhpakchaahdnkcjkfmccmdik">Chrome Extension</a>
@@ -238,7 +243,7 @@ html
                 linear-gradient(
                   to right,
                   <span data-code-colour>hsl(220, 90%, 50%)</span>,
-                  <span data-code-colour>hsl(0, 90%, 60%)</span>
+                  <span data-code-colour>hsl(  0, 90%, 60%)</span>
                 </span>);
             pre.language-(data-linked-step=2)
               code.language-.
@@ -454,6 +459,12 @@ html
               td.channel-name A
               td.channel-graph: canvas(data-defs='pre2-alpha')
           p.instructions Click the graphs for extra details
+
+      section(data-bespoke-hash='postcss-premul')
+        h2 Post vs pre
+        p More self promotion &mdash; <a href="https://github.com/gilmoreorless/postcss-gradient-transparency-fix">PostCSS gradient transparency fix</a>
+        p: img(src='images/postcss-fix.png')
+
 
       // FINALE
       
