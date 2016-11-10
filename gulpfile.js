@@ -1,5 +1,4 @@
-var pkg = require('./package.json'),
-  gulp = require('gulp'),
+var gulp = require('gulp'),
   gutil = require('gulp-util'),
   plumber = require('gulp-plumber'),
   rimraf = require('gulp-rimraf'),
@@ -12,7 +11,6 @@ var pkg = require('./package.json'),
   autoprefixer = require('gulp-autoprefixer'),
   csso = require('gulp-csso'),
   through = require('through'),
-  opn = require('opn'),
   ghpages = require('gh-pages'),
   path = require('path'),
   isDist = process.argv.indexOf('serve') === -1;
@@ -82,13 +80,11 @@ gulp.task('clean:images', function() {
     .pipe(rimraf());
 });
 
-gulp.task('connect', ['build'], function(done) {
+gulp.task('connect', ['build'], function() {
   connect.server({
     root: 'dist',
     livereload: true
   });
-
-  opn('http://localhost:8080', done);
 });
 
 gulp.task('watch', function() {
