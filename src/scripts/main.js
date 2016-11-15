@@ -74,60 +74,64 @@ if (!logoHolder.classList.contains('redacted')) {
 }
 
 // "Deep dive" images that open iframes
-var body = document.body;
-var frameHolder = document.createElement('div');
-frameHolder.className = 'deep-dive-frame-holder';
-body.appendChild(frameHolder);
+var USE_DEEP_DIVE = false;
 
-var ret = document.createElement('a');
-ret.className = 'deep-dive-return';
-ret.addEventListener('click', hideDeepDive, false);
-frameHolder.appendChild(ret);
+if (USE_DEEP_DIVE) {
+  var body = document.body;
+  var frameHolder = document.createElement('div');
+  frameHolder.className = 'deep-dive-frame-holder';
+  body.appendChild(frameHolder);
 
-function showDeepDive(iframe) {
-  body.classList.add('show-sub-frame');
-  iframe.classList.add('visible');
-}
+  var ret = document.createElement('a');
+  ret.className = 'deep-dive-return';
+  ret.addEventListener('click', hideDeepDive, false);
+  frameHolder.appendChild(ret);
 
-function hideDeepDive() {
-  body.classList.remove('show-sub-frame');
-  setTimeout(function () {
-    each.call(frameHolder.querySelectorAll('.visible'), function (frame) {
-      frame.classList.remove('visible');
-    });
-  }, 1500);
-}
-
-document.addEventListener('keyup', function (e) {
-  if (e.keyCode === 27) { // Escape
-    hideDeepDive();
+  function showDeepDive(iframe) {
+    body.classList.add('show-sub-frame');
+    iframe.classList.add('visible');
   }
-}, true);
 
-each.call(document.querySelectorAll('[data-href]'), function (img) {
-  var href = img.getAttribute('data-href');
+  function hideDeepDive() {
+    body.classList.remove('show-sub-frame');
+    setTimeout(function () {
+      each.call(frameHolder.querySelectorAll('.visible'), function (frame) {
+        frame.classList.remove('visible');
+      });
+    }, 1500);
+  }
 
-  // Wrap the image with a link
-  var a = document.createElement('a');
-  a.className = 'deep-dive-link';
-  a.href = href;
-  img.parentNode.insertBefore(a, img);
-  a.appendChild(img);
+  document.addEventListener('keyup', function (e) {
+    if (e.keyCode === 27) { // Escape
+      hideDeepDive();
+    }
+  }, true);
 
-  // Create an iframe
-  var iframe = document.createElement('iframe');
-  iframe.onload = function () {
-    console.log('LOADED', iframe);
-  };
-  iframe.src = href;
-  iframe.className = 'deep-dive-frame';
-  frameHolder.appendChild(iframe);
+  each.call(document.querySelectorAll('[data-href]'), function (img) {
+    var href = img.getAttribute('data-href');
 
-  a.addEventListener('click', function (e) {
-    e.preventDefault();
-    showDeepDive(iframe);
-  }, false);
-});
+    // Wrap the image with a link
+    var a = document.createElement('a');
+    a.className = 'deep-dive-link';
+    a.href = href;
+    img.parentNode.insertBefore(a, img);
+    a.appendChild(img);
+
+    // Create an iframe
+    var iframe = document.createElement('iframe');
+    iframe.onload = function () {
+      console.log('LOADED', iframe);
+    };
+    iframe.src = href;
+    iframe.className = 'deep-dive-frame';
+    frameHolder.appendChild(iframe);
+
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      showDeepDive(iframe);
+    }, false);
+  });
+}
 
 
 // Default bespoke plugins

@@ -733,17 +733,6 @@ table.channels
 // DEMO: Gradient Blending
 
 .demo-blend-gradient
-  .example
-    height: 1em
-    margin-bottom: 0
-    width: 300px
-
-    &.premul
-      background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), transparent)
-
-    + .example
-      margin-top: 0
-
   table.channels
     border-spacing: 0
     padding: .5em
@@ -758,6 +747,12 @@ table.channels
   canvas
     border: 1px solid #333
     height: 50px
+    width: 300px
+
+  .example
+    border: none
+    height: 2em
+    margin-bottom: 0
     width: 300px
 
 .demo-blend-gradient.funky .example.premul
