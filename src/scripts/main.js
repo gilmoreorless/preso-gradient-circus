@@ -202,7 +202,10 @@ require('conic-gradient');
 
 // Custom events
 deck.on('linked-step-change', function (event) {
-  updateBlendDemo(event.step);
+  var slide = deck.slides[event.slide];
+  if (slide.classList.contains('demo-blend-basic')) {
+    updateBlendDemo(event.step);
+  }
 });
 
 // Play/pause videos
