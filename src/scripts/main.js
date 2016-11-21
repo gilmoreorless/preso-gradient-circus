@@ -64,7 +64,7 @@ updateBlendDemo();
 
 // Blending colour graphs
 var blendingGraph = require('./blending-graph');
-blendingGraph('.demo-blend-gradient');
+var graphPlugin = blendingGraph('.demo-blend-gradient');
 
 // Grand finale
 var generateLogo = require('./generate-logo');
@@ -190,6 +190,7 @@ var deck = bespoke.from('article', [
   touch(),
   linkedBullets(),
   showcasePlugin(),
+  graphPlugin(),
   backdrop(),
   scale(),
   hash()

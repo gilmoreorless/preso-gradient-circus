@@ -392,7 +392,7 @@ html
             li.part-a(data-linked-step=7) I will draw 0.25 red + 0.5 of the background red
             li.part-a(data-linked-step=8) Final value is 0.75 red with 0.5 alpha
 
-      section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-black')
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans')
         h2 A little less conversation
         //- blockquote.single-bullet(data-linked-step=0)
         //-   p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
@@ -415,35 +415,15 @@ html
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-type='a')
-          //-   tr.title
-          //-     td
-          //-     td: h4 Pre-multiplied
-          //-   tr.channel-red
-          //-     td.channel-name R
-          //-     td.channel-graph: canvas(data-defs='pre-red')
-          //-   tr.channel-alpha
-          //-     td.channel-name A
-          //-     td.channel-graph: canvas(data-defs='pre-alpha')
-          //- p.instructions Click the graphs for extra details
-          //
-      section.demo-blend-gradient(data-bespoke-hash='blending-gradients-2', data-demo-def='red-trans')
-        h2 Now back to gradients
-        .demo-holder
-          table.channels
-            tr.examples
-              td.colour-def
+            tr.title(data-linked-step=5)
               td
-                canvas.example
-              td.colour-def
-            tr.title
-              td
-              td: h4 Normal
-            tr.channel-red
+              td: h4 Pre-multiplied
+            tr.channel-red(data-linked-step=5)
               td.channel-name R
-              td.channel-graph: canvas(data-type='r')
-            tr.channel-alpha
+              td.channel-graph: canvas(data-type='r-pre')
+            tr.channel-alpha(data-linked-step=5)
               td.channel-name A
-              td.channel-graph: canvas(data-type='a')
+              td.channel-graph: canvas(data-type='a-pre')
 
       section(data-bespoke-hash='pre-mulling-it-over')
         h2 Back to chat
