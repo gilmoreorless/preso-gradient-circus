@@ -383,22 +383,17 @@ html
           ol.conversation
             li.part-title.title-a GPU
             li.part-title.title-b Browser
-            li.part-b(data-linked-step=1) Please draw the 50% colour
-            li.part-a(data-linked-step=2) OK. What’s the lerp red here?
-            li.part-b(data-linked-step=3) 0.5
+            li.part-b(data-linked-step=1) Please draw colour at the 40% mark
+            li.part-a(data-linked-step=2) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
+            li.part-b(data-linked-step=3) 0.6
             li.part-a(data-linked-step=4) And what’s the lerp alpha here?
-            li.part-b(data-linked-step=5) 0.5
-            li.part-a(data-linked-step=6) Cool, 0.5 x 0.5 = 0.25
-            li.part-a(data-linked-step=7) I will draw 0.25 red + 0.5 of the background red
-            li.part-a(data-linked-step=8) Final value is 0.75 red with 0.5 alpha
+            li.part-b(data-linked-step=5) 0.6
+            li.part-a(data-linked-step=6) Cool, 0.6 x 0.6 = 0.36
+            li.part-a(data-linked-step=7) I will draw 0.36 red + 0.4 of the background red
+            li.part-a(data-linked-step=8) Final value is 0.76 red with 0.6 alpha
 
       section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans')
-        h2 A little less conversation
-        //- blockquote.single-bullet(data-linked-step=0)
-        //-   p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
-        //-   code cs = Cs x αs
-        //-   cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
-        //- .demo-holder(data-linked-step=1)
+        h2 A little less conversation <small>(a little more graphin’)</small>
         .demo-holder
           table.channels
             tr.examples
@@ -415,30 +410,34 @@ html
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-type='a')
-            tr.title(data-linked-step=5)
+            tr.title(data-linked-step=4)
               td
               td: h4 Pre-multiplied
-            tr.channel-red(data-linked-step=5)
+            tr.channel-red(data-linked-step=4)
               td.channel-name R
               td.channel-graph: canvas(data-type='r-pre')
-            tr.channel-alpha(data-linked-step=5)
+            tr.channel-alpha(data-linked-step=4)
               td.channel-name A
               td.channel-graph: canvas(data-type='a-pre')
 
       section(data-bespoke-hash='pre-mulling-it-over')
         h2 Back to chat
-        .demo-holder
+        blockquote.single-bullet(data-linked-step=0)
+          p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
+          code cs = Cs x αs
+          cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
+        .demo-holder(data-linked-step=1)
           ol.conversation
             li.part-title.title-a GPU
             li.part-title.title-b Browser
-            li.part-b(data-linked-step=1) Let me multiply the red at the start...
-            li.part-b(data-linked-step=2) Now please draw the 50% colour
-            li.part-a(data-linked-step=3) OK. What’s the lerp red here?
-            li.part-b(data-linked-step=4) 0.5, but <strong>don’t alter it</strong>
-            li.part-a(data-linked-step=5) And what’s the lerp alpha here?
-            li.part-b(data-linked-step=6) 0.5
-            li.part-a(data-linked-step=7) Cool, I will draw 0.5 red + 0.5 of the background red
-            li.part-a(data-linked-step=8) Final value is 1 red with 0.5 alpha
+            li.part-b(data-linked-step=2) Let me multiply the red at the start...
+            li.part-b(data-linked-step=3) Now please draw colour at the 40% mark
+            li.part-a(data-linked-step=4) OK. What’s the lerp red here?
+            li.part-b(data-linked-step=5) 0.6, but <strong>don’t bloody touch it</strong>
+            li.part-a(data-linked-step=6) Yeesh, calm down. And what’s the lerp alpha here?
+            li.part-b(data-linked-step=7) 0.6
+            li.part-a(data-linked-step=8) Cool, I will draw 0.6 red + 0.4 of the background red
+            li.part-a(data-linked-step=9) Final value is 1 red with 0.6 alpha
 
       section(data-bespoke-hash='postcss-premul')
         h2 Post vs pre

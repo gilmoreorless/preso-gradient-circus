@@ -3,7 +3,7 @@
 var rgbaBits = ['r', 'g', 'b', 'a'];
 
 var channelColours = {
-  r: {source: 'hsl(0, 100%, 50%)', bg: 'hsl(0, 100%, 80%)', sourcePost: 'hsl(0, 80%, 20%)'},
+  r: {source: 'hsl(0, 90%, 50%)', bg: 'hsl(0, 100%, 80%)', sourcePost: 'hsl(0, 80%, 20%)'},
   a: {source: '#666'}
 };
 
@@ -16,27 +16,22 @@ var demoDefs = {
     from: [255, 0, 0, 1],
     to:   [  0, 0, 0, 0],
     states: [
-      {source: 1, anim: 'source'},
-      {source: 1, sourcePost: 1, anim: 'sourcePost'},
-      {source: 1, sourcePost: 1, bg: 1, anim: 'bg'},
+      {}, // Empty state to start
+      { post: {source: 1, anim: 'source'} },
+      { post: {source: 1, sourcePost: 1, anim: 'sourcePost'} },
+      { post: {source: 1, sourcePost: 1, bg: 1, anim: 'bg'} },
+      { post: {source: 1, sourcePost: 1, bg: 1} },
+      {
+        post: {source: 1, sourcePost: 1, bg: 1},
+        pre:  {source: 1, sourcePost: 1, anim: ['source', 'sourcePost']}
+      },
+      {
+        post: {source: 1, sourcePost: 1, bg: 1},
+        pre:  {source: 1, sourcePost: 1, bg: 1, anim: 'bg'}
+      },
     ]
   }
 };
-
-/**
- * STATES
- *
- * = Normal mode
- *   - standard lerp 0% - 100%
- *   - standard lerp 0% - 60%
- *   - colour * alpha @ 60%
- *   - + bg colour @ 60%
- *   - all lines 0% - 100%
- * = Premul mode
- *   - standard lerp 0% - 60%
- *   - + bg colour @ 60%
- *   - all lines 0% - 100%
- */
 
 
 //// HELPERS
@@ -120,6 +115,7 @@ function createBlendGraph(canvas, opts) {
   var channel = opts.channel;
   var chIdx = rgbaBits.indexOf(channel);
   var isColourChannel = channel !== 'a';
+  var isPremul = opts.type === 'pre';
 
   var x, perc, col, alpha, multiplied, computed;
 
@@ -136,7 +132,7 @@ function createBlendGraph(canvas, opts) {
 
     values.linear.push(col);
     if (isColourChannel) {
-      if (opts.isPremul) {
+      if (isPremul) {
         multiplied = col;
       } else {
         multiplied = col * alpha;
@@ -152,9 +148,7 @@ function createBlendGraph(canvas, opts) {
 
 function drawBlendGraphs(graphs, state) {
   each.call(graphs, function (canvas) {
-    if (canvas.opts.type == 'post') {
-      drawBlendGraphState(canvas, state);
-    }
+    drawBlendGraphState(canvas, state[canvas.opts.type] || {});
   });
 }
 
@@ -167,11 +161,19 @@ function drawBlendGraphState(canvas, state) {
   var colours = channelColours[channel];
   var isColourChannel = channel !== 'a';
 
+  var anims = {};
+  if (state.anim) {
+    anims = [].concat(state.anim).reduce(function (obj, field) {
+      obj[field] = true;
+      return obj;
+    }, {});
+  }
+
   var yPos = function (val) {
     return (1 - val) * height;
   };
 
-  var drawPart = function (values, percentage, closePath) {
+  var drawPart = function (values, percentage, isOpenPath) {
     var samples = getSamples(values, percentage);
     var count = samples.length;
     ctx.beginPath();
@@ -179,7 +181,7 @@ function drawBlendGraphState(canvas, state) {
     for (var x = 1; x <= count; x++) {
       ctx.lineTo(x, yPos(samples[x]));
     }
-    if (closePath !== false) {
+    if (!isOpenPath) {
       ctx.lineTo(count - 1, height);
       ctx.lineTo(0, height);
       ctx.closePath();
@@ -202,21 +204,22 @@ function drawBlendGraphState(canvas, state) {
     // Draw the background colour
     if ('bg' in state && isColourChannel) {
       ctx.fillStyle = colours.bg;
-      drawPart(canvas.values.computed, state.anim === 'bg' ? animPerc : state.bg);
+      drawPart(canvas.values.computed, anims.bg ? animPerc : state.bg);
       ctx.fill();
     }
 
     // Draw the primary colour
     if ('source' in state) {
       ctx.fillStyle = colours.source;
-      drawPart(canvas.values.linear, state.anim === 'source' ? animPerc : state.source);
+      drawPart(canvas.values.linear, anims.source ? animPerc : state.source);
       ctx.fill();
     }
 
     // Draw the post-multiplied mark
     if ('sourcePost' in state && isColourChannel) {
       ctx.strokeStyle = colours.sourcePost;
-      drawPart(canvas.values.multiplied, state.anim === 'sourcePost' ? animPerc : state.sourcePost, false);
+      ctx.lineWidth = 2;
+      drawPart(canvas.values.multiplied, anims.sourcePost ? animPerc : state.sourcePost, true);
       ctx.stroke();
     }
 
@@ -259,8 +262,7 @@ function setupGraphs(selector) {
 
     // GREAT BIG LAZY HACK
     var frag = document.createDocumentFragment();
-    [''].concat(defs.states).forEach(function (_, i) {
-    // defs.states.forEach(function (_, i) {
+    defs.states.forEach(function (_, i) {
       var el = document.createElement('div');
       el.className = 'linked-step-hack';
       el.setAttribute('data-linked-step', i);
@@ -286,7 +288,7 @@ function setupGraphs(selector) {
         }
 
         var defs = target.defs;
-        var stateIndex = event.step - 1;
+        var stateIndex = event.step;
         var state = defs.states[stateIndex];
         if (state) {
           drawBlendGraphs(target.graphs, state);
