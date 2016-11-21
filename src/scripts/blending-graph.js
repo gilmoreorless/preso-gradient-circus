@@ -16,11 +16,9 @@ var demoDefs = {
     from: [255, 0, 0, 1],
     to:   [  0, 0, 0, 0],
     states: [
-      {source: 1},
-      {source: 0.6},
-      {source: 0.6, sourcePost: 0.6},
-      {source: 0.6, sourcePost: 0.6, bg: 0.6},
-      {source: 1, sourcePost: 1, bg: 1},
+      {source: 1, anim: 'source'},
+      {source: 1, sourcePost: 1, anim: 'sourcePost'},
+      {source: 1, sourcePost: 1, bg: 1, anim: 'bg'},
     ]
   }
 };
@@ -161,8 +159,6 @@ function drawBlendGraphs(graphs, state) {
 }
 
 function drawBlendGraphState(canvas, state) {
-  // TODO: Animate from previous state
-
   var width = canvas.width;
   var height = canvas.height;
   var ctx = canvas.getContext('2d');
@@ -190,28 +186,46 @@ function drawBlendGraphState(canvas, state) {
     }
   };
 
-  ctx.clearRect(0, 0, width, height);
+  var animTimeInMillis = 1000;
+  var startTime;
 
-  // Draw the background colour
-  if ('bg' in state && isColourChannel) {
-    ctx.fillStyle = colours.bg;
-    drawPart(canvas.values.computed, state.bg);
-    ctx.fill();
-  }
+  var doTheDrawingNow = function (perfNow) {
+    var animPerc = 0;
+    if (startTime === undefined) {
+      startTime = performance.now();
+    } else {
+      animPerc = (perfNow - startTime) / animTimeInMillis;
+    }
 
-  // Draw the primary colour
-  if ('source' in state) {
-    ctx.fillStyle = colours.source;
-    drawPart(canvas.values.linear, state.source);
-    ctx.fill();
-  }
+    ctx.clearRect(0, 0, width, height);
 
-  // Draw the post-multiplied mark
-  if ('sourcePost' in state && isColourChannel) {
-    ctx.strokeStyle = colours.sourcePost;
-    drawPart(canvas.values.multiplied, state.sourcePost, false);
-    ctx.stroke();
-  }
+    // Draw the background colour
+    if ('bg' in state && isColourChannel) {
+      ctx.fillStyle = colours.bg;
+      drawPart(canvas.values.computed, state.anim === 'bg' ? animPerc : state.bg);
+      ctx.fill();
+    }
+
+    // Draw the primary colour
+    if ('source' in state) {
+      ctx.fillStyle = colours.source;
+      drawPart(canvas.values.linear, state.anim === 'source' ? animPerc : state.source);
+      ctx.fill();
+    }
+
+    // Draw the post-multiplied mark
+    if ('sourcePost' in state && isColourChannel) {
+      ctx.strokeStyle = colours.sourcePost;
+      drawPart(canvas.values.multiplied, state.anim === 'sourcePost' ? animPerc : state.sourcePost, false);
+      ctx.stroke();
+    }
+
+    if (animPerc <= 1) {
+      requestAnimationFrame(doTheDrawingNow);
+    }
+  };
+
+  requestAnimationFrame(doTheDrawingNow);
 }
 
 
