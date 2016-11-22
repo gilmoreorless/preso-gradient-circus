@@ -7,12 +7,9 @@ var channelColours = {
   a: {source: '#666'}
 };
 
+var fullGraph = {source: 1, sourcePost: 1, bg: 1};
 var demoDefs = {
-  'red-black': {
-    from: [255, 0, 0, 1],
-    to:   [  0, 0, 0, 1]
-  },
-  'red-trans': {
+  'red-trans-post': {
     from: [255, 0, 0, 1],
     to:   [  0, 0, 0, 0],
     states: [
@@ -20,13 +17,19 @@ var demoDefs = {
       { post: {source: 1, anim: 'source'} },
       { post: {source: 1, sourcePost: 1, anim: 'sourcePost'} },
       { post: {source: 1, sourcePost: 1, bg: 1, anim: 'bg'} },
-      { post: {source: 1, sourcePost: 1, bg: 1} },
+    ]
+  },
+  'red-trans-pre': {
+    from: [255, 0, 0, 1],
+    to:   [  0, 0, 0, 0],
+    states: [
+      { post: fullGraph },
       {
-        post: {source: 1, sourcePost: 1, bg: 1},
+        post: fullGraph,
         pre:  {source: 1, sourcePost: 1, anim: ['source', 'sourcePost']}
       },
       {
-        post: {source: 1, sourcePost: 1, bg: 1},
+        post: fullGraph,
         pre:  {source: 1, sourcePost: 1, bg: 1, anim: 'bg'}
       },
     ]

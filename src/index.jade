@@ -392,7 +392,7 @@ html
             li.part-a(data-linked-step=7) I will draw 0.36 red + 0.4 of the background red
             li.part-a(data-linked-step=8) Final value is 0.76 red with 0.6 alpha
 
-      section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans')
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans-post')
         h2 A little less conversation <small>(a little more graphin’)</small>
         .demo-holder
           table.channels
@@ -410,15 +410,6 @@ html
             tr.channel-alpha
               td.channel-name A
               td.channel-graph: canvas(data-type='a')
-            tr.title(data-linked-step=4)
-              td
-              td: h4 Pre-multiplied
-            tr.channel-red(data-linked-step=4)
-              td.channel-name R
-              td.channel-graph: canvas(data-type='r-pre')
-            tr.channel-alpha(data-linked-step=4)
-              td.channel-name A
-              td.channel-graph: canvas(data-type='a-pre')
 
       section(data-bespoke-hash='pre-mulling-it-over')
         h2 Back to chat
@@ -430,7 +421,7 @@ html
           ol.conversation
             li.part-title.title-a GPU
             li.part-title.title-b Browser
-            li.part-b(data-linked-step=2) Let me multiply the red at the start...
+            li.part-b(data-linked-step=2) Let me multiply red x alpha at the start...
             li.part-b(data-linked-step=3) Now please draw colour at the 40% mark
             li.part-a(data-linked-step=4) OK. What’s the lerp red here?
             li.part-b(data-linked-step=5) 0.6, but <strong>don’t bloody touch it</strong>
@@ -438,6 +429,34 @@ html
             li.part-b(data-linked-step=7) 0.6
             li.part-a(data-linked-step=8) Cool, I will draw 0.6 red + 0.4 of the background red
             li.part-a(data-linked-step=9) Final value is 1 red with 0.6 alpha
+
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients-premul', data-demo-def='red-trans-pre')
+        h2 Last graphs, I promise
+        .demo-holder
+          table.channels
+            tr.examples
+              td.colour-def
+              td
+                canvas.example
+              td.colour-def
+            tr.title
+              td
+              td: h4 Normal
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-type='r')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-type='a')
+            tr.title
+              td
+              td: h4 Pre-multiplied
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-type='r-pre')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-type='a-pre')
 
       section(data-bespoke-hash='postcss-premul')
         h2 Post vs pre
