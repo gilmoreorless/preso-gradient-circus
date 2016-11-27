@@ -67,7 +67,7 @@ var blendingGraph = require('./blending-graph');
 var graphPlugin = blendingGraph('.demo-blend-gradient');
 
 // Grand finale
-var generateLogo = require('./generate-logo');
+var generateLogo = require('./generate-css3-logo');
 var logoHolder = document.querySelector('.demo-logo .showcase-target');
 if (!logoHolder.classList.contains('redacted')) {
   generateLogo(logoHolder);
