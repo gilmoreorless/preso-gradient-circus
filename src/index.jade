@@ -161,29 +161,8 @@ html
 
       // ACT II
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-ii-angles')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-ii-layering')
         h1 Act II
-        h2 Linear gradient angles
-
-      section(data-bespoke-hash='do-you-really')
-        h2 Do you really understand?
-        p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
-        if withInstructions
-          p: img(src='images/pbrosset-medium.jpg')
-        else
-          p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
-
-      section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
-        if withInstructions
-          p: img(src='images/pbrosset-codepen.gif', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
-        else
-          p: video(src='images/pbrosset-codepen.mov', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
-
-
-      // ACT III
-
-      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iii-layering')
-        h1 Act III
         h2 Background image layering
 
       section.demo-layering(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='layering')
@@ -224,6 +203,27 @@ html
             .showcase-container
               .showcase-target
         p.instructions Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image
+
+
+      // ACT III
+
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iii-angles')
+        h1 Act III
+        h2 Linear gradient angles
+
+      section(data-bespoke-hash='do-you-really')
+        h2 Do you really understand?
+        p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
+        if withInstructions
+          p: img(src='images/pbrosset-medium.jpg')
+        else
+          p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
+
+      section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
+        if withInstructions
+          p: img(src='images/pbrosset-codepen.gif', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
+        else
+          p: video(src='images/pbrosset-codepen.mov', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
 
 
       // ACT IV
@@ -377,23 +377,23 @@ html
               td(data-type='output', data-linked-step=3): code
               td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
 
-      section(data-bespoke-hash='gpu-chat')
-        h2 Now back to gradients
-        .demo-holder
-          ol.conversation
-            li.part-title.title-a GPU
-            li.part-title.title-b Browser
-            li.part-b(data-linked-step=1) Please draw colour at the 40% mark
-            li.part-a(data-linked-step=2) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
-            li.part-b(data-linked-step=3) 0.6
-            li.part-a(data-linked-step=4) And what’s the lerp alpha here?
-            li.part-b(data-linked-step=5) 0.6
-            li.part-a(data-linked-step=6) Cool, 0.6 x 0.6 = 0.36
-            li.part-a(data-linked-step=7) I will draw 0.36 red + 0.4 of the background red
-            li.part-a(data-linked-step=8) Final value is 0.76 red with 0.6 alpha
+      //- section(data-bespoke-hash='gpu-chat')
+      //-   h2 Now back to gradients
+      //-   .demo-holder
+      //-     ol.conversation
+      //-       li.part-title.title-a GPU
+      //-       li.part-title.title-b Browser
+      //-       li.part-b(data-linked-step=1) Please draw colour at the 40% mark
+      //-       li.part-a(data-linked-step=2) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
+      //-       li.part-b(data-linked-step=3) 0.6
+      //-       li.part-a(data-linked-step=4) And what’s the lerp alpha here?
+      //-       li.part-b(data-linked-step=5) 0.6
+      //-       li.part-a(data-linked-step=6) Cool, 0.6 x 0.6 = 0.36
+      //-       li.part-a(data-linked-step=7) I will draw 0.36 red + 0.4 of the background red
+      //-       li.part-a(data-linked-step=8) Final value is 0.76 red with 0.6 alpha
 
       section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans-post')
-        h2 A little less conversation <small>(a little more graphin’)</small>
+        h2 Now back to gradients
         .demo-holder
           table.channels
             tr.examples
@@ -411,8 +411,16 @@ html
               td.channel-name A
               td.channel-graph: canvas(data-type='a')
 
+      //- section.demo-blend-gradient.colour-test(data-bespoke-hash='colour-test')
+      //-   h2 COLOUR TEST
+      //-   .demo-holder
+      //-     <div class="spot-test" style="background-color:hsl(0, 80%, 20%); height:2px"></div>
+      //-     <div class="spot-test" style="background-color:hsl(0, 90%, 50%)"></div>
+      //-     <div class="spot-test" style="background-color:hsl(0, 100%, 80%)"></div>
+      //-     <div class="spot-test" style="background-color:#666"></div>
+
       section(data-bespoke-hash='pre-mulling-it-over')
-        h2 Back to chat
+        h2 Graphics chat
         blockquote.single-bullet(data-linked-step=0)
           p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
           code cs = Cs x αs
@@ -423,7 +431,7 @@ html
             li.part-title.title-b Browser
             li.part-b(data-linked-step=2) Let me multiply red x alpha at the start...
             li.part-b(data-linked-step=3) Now please draw colour at the 40% mark
-            li.part-a(data-linked-step=4) OK. What’s the lerp red here?
+            li.part-a(data-linked-step=4) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
             li.part-b(data-linked-step=5) 0.6, but <strong>don’t bloody touch it</strong>
             li.part-a(data-linked-step=6) Yeesh, calm down. And what’s the lerp alpha here?
             li.part-b(data-linked-step=7) 0.6
@@ -431,7 +439,7 @@ html
             li.part-a(data-linked-step=9) Final value is 1 red with 0.6 alpha
 
       section.demo-blend-gradient(data-bespoke-hash='blending-gradients-premul', data-demo-def='red-trans-pre')
-        h2 Last graphs, I promise
+        h2 A little less conversation <small>(a little more graphin’)</small>
         .demo-holder
           table.channels
             tr.examples
