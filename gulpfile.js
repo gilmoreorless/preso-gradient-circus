@@ -1,5 +1,4 @@
-var pkg = require('./package.json'),
-  gulp = require('gulp'),
+var gulp = require('gulp'),
   gutil = require('gulp-util'),
   plumber = require('gulp-plumber'),
   rimraf = require('gulp-rimraf'),
@@ -15,7 +14,29 @@ var pkg = require('./package.json'),
   opn = require('opn'),
   ghpages = require('gh-pages'),
   path = require('path'),
+  fs = require('fs'),
   isDist = process.argv.indexOf('serve') === -1;
+
+var distDir = 'dist';
+var namespace;
+try {
+  namespace = fs.readFileSync('.namespace', 'utf-8').trim();
+} catch (e) {}
+if (namespace) {
+  distDir = path.join(distDir, namespace);
+}
+
+function distpath(pathname) {
+  return pathname ? path.join(distDir, pathname) : distDir;
+}
+
+function gdest(pathname) {
+  return gulp.dest(distpath(pathname));
+}
+
+function gsrc(pathname) {
+  return gulp.src(distpath(pathname));
+}
 
 gulp.task('js', ['clean:js'], function() {
   return gulp.src('src/scripts/main.js')
@@ -23,7 +44,7 @@ gulp.task('js', ['clean:js'], function() {
     .pipe(browserify({ transform: ['debowerify'], debug: !isDist }))
     .pipe(isDist ? uglify() : through())
     .pipe(rename('build.js'))
-    .pipe(gulp.dest('dist/build'))
+    .pipe(gdest('build'))
     .pipe(connect.reload());
 });
 
@@ -32,7 +53,7 @@ gulp.task('html', ['clean:html'], function() {
     .pipe(isDist ? through() : plumber())
     .pipe(jade({ pretty: true }))
     .pipe(rename('index.html'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gdest())
     .pipe(connect.reload());
 });
 
@@ -47,44 +68,44 @@ gulp.task('css', ['clean:css'], function() {
     .pipe(autoprefixer('last 2 versions', { map: false }))
     .pipe(isDist ? csso() : through())
     .pipe(rename('build.css'))
-    .pipe(gulp.dest('dist/build'))
+    .pipe(gdest('build'))
     .pipe(connect.reload());
 });
 
 gulp.task('images', ['clean:images'], function() {
   return gulp.src('src/images/**/*')
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gdest('images'))
     .pipe(connect.reload());
 });
 
 gulp.task('clean', function() {
-  return gulp.src('dist')
+  return gsrc()
     .pipe(rimraf());
 });
 
 gulp.task('clean:html', function() {
-  return gulp.src('dist/index.html')
+  return gsrc('index.html')
     .pipe(rimraf());
 });
 
 gulp.task('clean:js', function() {
-  return gulp.src('dist/build/build.js')
+  return gsrc('build/build.js')
     .pipe(rimraf());
 });
 
 gulp.task('clean:css', function() {
-  return gulp.src('dist/build/build.css')
+  return gsrc('build/build.css')
     .pipe(rimraf());
 });
 
 gulp.task('clean:images', function() {
-  return gulp.src('dist/images')
+  return gsrc('images')
     .pipe(rimraf());
 });
 
 gulp.task('connect', ['build'], function(done) {
   connect.server({
-    root: 'dist',
+    root: distpath(),
     livereload: true
   });
 
@@ -102,7 +123,15 @@ gulp.task('watch', function() {
 });
 
 gulp.task('deploy', ['build'], function(done) {
-  ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log }, done);
+  var message = 'Updated live version';
+  if (namespace) {
+    message += ' for ' + namespace;
+  }
+  ghpages.publish(path.join(__dirname, 'dist'), {
+    logger: gutil.log,
+    message: message,
+    add: true
+  }, done);
 });
 
 gulp.task('build', ['js', 'html', 'css', 'images']);
