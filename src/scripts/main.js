@@ -74,7 +74,7 @@ if (!logoHolder.classList.contains('redacted')) {
 }
 
 // "Deep dive" images that open iframes
-var USE_DEEP_DIVE = true;
+var USE_DEEP_DIVE = false;
 
 if (USE_DEEP_DIVE) {
   var body = document.body;

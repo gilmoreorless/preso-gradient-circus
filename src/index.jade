@@ -1,4 +1,4 @@
-- var withInstructions = false
+- var withInstructions = true
 - var bodyClass = withInstructions ? 'has-instructions' : '';
 
 doctype html
@@ -17,11 +17,11 @@ html
       if withInstructions
         section.preamble(data-bespoke-state='preamble', data-bespoke-hash='preamble')
           h2 Hi there
-          p Welcome to this slide deck, built for a presentation at <a href="http://sydcss.com/">SydCSS</a> in July 2015.
+          p Welcome to this slide deck for a talk at <a href="http://2016.decompress.com.au/">Decompress</a> in December 2016.
           p Before you go browsing these slides, here are some things you should know:
           ul
             li This deck was built and tested for use in one browser (Chrome) running on one machine (mine).
-              | Any other combination has no guarantees of working as expected.
+              | Any other combination has no guarantees of working as expected (especially fonts).
             li Use left/right arrow keys or spacebar to navigate the slides.
             li Some slides have interactive content.
               | Extra instructions have been added to these slides <span class="instructions-preview">in this style</span>.
