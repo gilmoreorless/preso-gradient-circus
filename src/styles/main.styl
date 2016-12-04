@@ -17,6 +17,7 @@ $emdash = '\2014'
 
 $gradient-background = radial-gradient(farthest-corner, $background, $sydcss 110%)
 $img-shadow = 0 0 30px -3px #000
+$deep-dive-duration = 1s
 
 *
   margin: 0
@@ -25,9 +26,14 @@ $img-shadow = 0 0 30px -3px #000
 html
   text-size-adjust: auto
 
+body
+  background: $gradient-background
+  overflow: hidden
+
 .bespoke-parent
   font-size: 1.5em
   background: $gradient-background
+  background-position: 50% 50%
   color: $foreground
   font-family: $sans-serif
   position: absolute
@@ -37,7 +43,10 @@ html
   bottom: 0
   overflow: hidden
   text-align: center
-  background-position: 50% 50%
+  transition: transform $deep-dive-duration
+
+  .show-sub-frame &
+    transform: translateY(-100%)
 
 .bespoke-scale-parent
   position: absolute
@@ -188,12 +197,15 @@ a
 img, video
   box-shadow: $img-shadow
   max-width: 95%
+  max-height: 75vh;
 
 p, .single-bullet
   max-width: 100%
 
 p > img,
-p > video
+p > video,
+.deep-dive-link > img,
+.deep-dive-link > video
   max-width: 100%
   margin-top: .5em
 
@@ -234,6 +246,10 @@ blockquote
     &:before
       content: $emdash
       margin-right: .25em
+
+abbr
+  border-bottom: 1px dashed
+  cursor: help
 
 
 // Prism overrides
@@ -340,6 +356,46 @@ pre.linked-step
 // .code-steps-code .linked-step-inactive,
 // .code-steps-code .linked-step-active:not(.linked-step-current)
 //   display: none
+
+
+// "Deep dive" images
+
+.deep-dive-frame-holder
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  transition: transform $deep-dive-duration
+  transform: translateY(100%)
+
+  .show-sub-frame &
+    transform: translateY(0)
+
+.deep-dive-link
+  border: none
+
+.deep-dive-return
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 5%
+  background: linear-gradient(to right, $sydcss -10%, hsl(30, 72%, 59%) 50%, $sydcss 110%)
+  cursor: pointer
+  border: none
+
+.deep-dive-frame
+  display: none
+  border: none
+  width: 100%
+  height: 95%
+  position: absolute
+  top: 5%
+
+  &.visible
+    display: block
 
 
 // --- Specific slides / demos ---
@@ -526,7 +582,6 @@ $bgimage-timing-slow = 3s
   background-position: 100% 0, 0 0;
   background-repeat: no-repeat
 
-
 // DEMO: Colour calculations
 
 .demo-colour-calcs .example
@@ -678,20 +733,40 @@ table.channels
   color: #666
 
 
+// DEMO: Gradient conversations
+
+.conversation
+  display: block
+  list-style: none
+  padding: .5em
+
+  li
+    clear: both
+    margin: 0 0 .5em 0
+    padding: 0
+
+  .part-title
+    float: left
+    font-weight: bold
+
+    &.title-b
+      clear: none
+      float: right
+
+  .part-a, .part-b
+    background: lime
+    border-radius: .3em
+    float: left
+    padding: .2em .4em
+
+  .part-b
+    background: lightblue
+    float: right
+
+
 // DEMO: Gradient Blending
 
 .demo-blend-gradient
-  .example
-    height: 1em
-    margin-bottom: 0
-    width: 300px
-
-    &.premul
-      background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), transparent)
-
-    + .example
-      margin-top: 0
-
   table.channels
     border-spacing: 0
     padding: .5em
@@ -706,6 +781,12 @@ table.channels
   canvas
     border: 1px solid #333
     height: 50px
+    width: 300px
+
+  .example
+    border: none
+    height: 2em
+    margin-bottom: 0
     width: 300px
 
 .demo-blend-gradient.funky .example.premul
@@ -740,7 +821,12 @@ table.channels
   background-color: rgba(0, 0, 0, 0.8)
   border-radius: .25em
   color: $background
+  display: none
   padding: .5em
+
+.has-instructions .instructions,
+.has-instructions .instructions-preview
+  display: block
 
 .instructions-preview
   padding: .1em .25em
@@ -769,3 +855,13 @@ table.channels
   font-size: 3em
   line-height: 1
   margin-top: 0
+
+// TEST
+
+.colour-test .demo-holder
+  padding: 1em
+
+.spot-test
+  width: 2em
+  height: 2em
+  margin: 0 2em

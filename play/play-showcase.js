@@ -1,6 +1,10 @@
 (function () {
-//   var elem = document.querySelector('.layers');
-  var elem = document.querySelector('.js-logo');
+  var elem;
+  // elem = document.querySelector('.layers');
+  // elem = document.querySelector('.sydcss .js-logo');
+  elem = document.querySelector('.css3 .js-logo');
 
-  bgImageShowcase.inspect(elem);
+  if (elem) {
+    bgImageShowcase.inspect(elem);
+  }
 })();

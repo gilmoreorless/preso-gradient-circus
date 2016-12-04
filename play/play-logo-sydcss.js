@@ -1,5 +1,5 @@
-var doStuff = (function () {
-  var elem = document.querySelector('.js-logo');
+var doStuffSydCss = (function () {
+  var elem = document.querySelector('.sydcss .js-logo');
 
   var colours = ['#FFF', '#D9542B'];
 //   colours = ['lime', 'blue', 'red'];
@@ -101,7 +101,7 @@ var doStuff = (function () {
   tmp = getBoxBisector([17, 27], 1, 3);
   var armLeftLowerExclusionStops = [armLeftLowerExclusionGradient.stops[0], tmp.stops[0]];
   armLeftLowerExclusionStops.feather = true;
-  
+
   var armRightUpperGradient = getBoxBisector([7, 4], 2, 4);
   var armRightLowerGradient = getBoxBisector([6, 3], 3, 1);
   var armRightLowerExclusionGradient = getBoxBisector([6, 11], 2, 4);
@@ -276,4 +276,4 @@ var doStuff = (function () {
   elem.style.backgroundImage = images.join(', ');
 });
 
-doStuff();
+doStuffSydCss();

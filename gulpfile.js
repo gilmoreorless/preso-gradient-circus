@@ -11,7 +11,6 @@ var gulp = require('gulp'),
   autoprefixer = require('gulp-autoprefixer'),
   csso = require('gulp-csso'),
   through = require('through'),
-  opn = require('opn'),
   ghpages = require('gh-pages'),
   path = require('path'),
   fs = require('fs'),
@@ -103,13 +102,11 @@ gulp.task('clean:images', function() {
     .pipe(rimraf());
 });
 
-gulp.task('connect', ['build'], function(done) {
+gulp.task('connect', ['build'], function() {
   connect.server({
     root: distpath(),
     livereload: true
   });
-
-  opn('http://localhost:8080', done);
 });
 
 gulp.task('watch', function() {

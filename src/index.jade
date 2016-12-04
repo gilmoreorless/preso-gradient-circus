@@ -1,4 +1,5 @@
-- var withInstructions = true
+- var withInstructions = false
+- var bodyClass = withInstructions ? 'has-instructions' : '';
 
 doctype html
 html
@@ -9,7 +10,7 @@ html
 
     link(rel='stylesheet', type='text/css', href='build/build.css')
 
-  body
+  body(class=bodyClass)
 
     article
 
@@ -75,15 +76,20 @@ html
         h2 Patterns
         .single-bullet(data-linked-step=0)
           p Gradients only &mdash; <a href="http://lea.verou.me/css3patterns/">lea.verou.me/css3patterns</a>
-          p: img(src='images/gradient-gallery-lea.png')
+          p: img(src='images/gradient-gallery-lea.png', data-href='http://lea.verou.me/css3patterns/')
         .single-bullet(data-linked-step=1)
           p Gradients + blend modes &mdash; <a href="http://bennettfeely.com/gradients/">bennettfeely.com/gradients</a>
-          p: img(src='images/gradient-gallery-bennett.png')
+          p: img(src='images/gradient-gallery-bennett.png', data-href='http://bennettfeely.com/gradients/')
 
       section(data-bespoke-hash='pictures')
         h2 Pictures
         p A single div &mdash; <a href="http://a.singlediv.com/">a.singlediv.com</a>
-        p: img(src='images/gradient-gallery-asinglediv.png')
+        p: img(src='images/gradient-gallery-asinglediv.png', data-href='http://a.singlediv.com/')
+
+      section(data-bespoke-hash='themes')
+        h2 Themes
+        p Blatant self promotion &mdash; <a href="https://gilmoreorless.github.io/">gilmoreorless.github.io</a>
+        p: img(src='images/gradient-gallery-gilmoreorless.png', data-href='https://gilmoreorless.github.io/')
 
       section(data-bespoke-hash='debugging')
         h2 Debugging
@@ -96,7 +102,7 @@ html
         if withInstructions
           p: img(src='images/gradifycss-1.jpg', data-swap-src='images/gradifycss-2.jpg', data-swap-time=3)
         else
-          p: video(src='images/gradifycss.mov', loop, data-autoplay-slide)
+          p: video(src='images/gradifycss.mov', loop, data-autoplay-slide, data-href='http://www.gradifycss.com/')
 
       section(data-bespoke-state='grey-area', data-bespoke-hash='animation')
         h2 Background animation
@@ -155,29 +161,8 @@ html
 
       // ACT II
 
-      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-ii-angles')
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-ii-layering')
         h1 Act II
-        h2 Linear gradient angles
-
-      section(data-bespoke-hash='do-you-really')
-        h2 Do you really understand?
-        p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
-        if withInstructions
-          p: img(src='images/pbrosset-medium.jpg')
-        else
-          p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
-
-      section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
-        if withInstructions
-          p: img(src='images/pbrosset-codepen.gif')
-        else
-          p: video(src='images/pbrosset-codepen.mov')
-
-
-      // ACT III
-
-      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iii-layering')
-        h1 Act III
         h2 Background image layering
 
       section.demo-layering(data-bgimage-showcase, data-bespoke-state='showcase', data-bespoke-hash='layering')
@@ -220,6 +205,27 @@ html
         p.instructions Use number keys <kbd>1</kbd> to <kbd>4</kbd> to change the image
 
 
+      // ACT III
+
+      section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iii-angles')
+        h1 Act III
+        h2 Linear gradient angles
+
+      section(data-bespoke-hash='do-you-really')
+        h2 Do you really understand?
+        p: a(href='https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf') Patrick Brosset on Medium
+        if withInstructions
+          p: img(src='images/pbrosset-medium.jpg')
+        else
+          p: video(src='images/pbrosset-medium.mov', data-autoplay-slide)
+
+      section(data-bespoke-state='middle', data-bespoke-hash='linear-angles')
+        if withInstructions
+          p: img(src='images/pbrosset-codepen.gif', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
+        else
+          p: video(src='images/pbrosset-codepen.mov', data-href='http://codepen.io/captainbrosset/full/ByqRMB/')
+
+
       // ACT IV
 
       section(data-bespoke-state='title', data-bespoke-backdrop='title', data-bespoke-hash='act-iv-colour')
@@ -237,7 +243,7 @@ html
                 linear-gradient(
                   to right,
                   <span data-code-colour>hsl(220, 90%, 50%)</span>,
-                  <span data-code-colour>hsl(0, 90%, 60%)</span>
+                  <span data-code-colour>hsl(  0, 90%, 60%)</span>
                 </span>);
             pre.language-(data-linked-step=2)
               code.language-.
@@ -371,88 +377,100 @@ html
               td(data-type='output', data-linked-step=3): code
               td(data-type='output', data-linked-step=3): .channel-meter: .channel-fill
 
-      section.demo-blend-gradient(data-bespoke-hash='blending-gradients')
+      //- section(data-bespoke-hash='gpu-chat')
+      //-   h2 Now back to gradients
+      //-   .demo-holder
+      //-     ol.conversation
+      //-       li.part-title.title-a GPU
+      //-       li.part-title.title-b Browser
+      //-       li.part-b(data-linked-step=1) Please draw colour at the 40% mark
+      //-       li.part-a(data-linked-step=2) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
+      //-       li.part-b(data-linked-step=3) 0.6
+      //-       li.part-a(data-linked-step=4) And what’s the lerp alpha here?
+      //-       li.part-b(data-linked-step=5) 0.6
+      //-       li.part-a(data-linked-step=6) Cool, 0.6 x 0.6 = 0.36
+      //-       li.part-a(data-linked-step=7) I will draw 0.36 red + 0.4 of the background red
+      //-       li.part-a(data-linked-step=8) Final value is 0.76 red with 0.6 alpha
+
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients', data-demo-def='red-trans-post')
         h2 Now back to gradients
+        .demo-holder
+          table.channels
+            tr.examples
+              td.colour-def
+              td
+                canvas.example
+              td.colour-def
+            tr.title
+              td
+              td: h4 Normal
+            tr.channel-red
+              td.channel-name R
+              td.channel-graph: canvas(data-type='r')
+            tr.channel-alpha
+              td.channel-name A
+              td.channel-graph: canvas(data-type='a')
+
+      //- section.demo-blend-gradient.colour-test(data-bespoke-hash='colour-test')
+      //-   h2 COLOUR TEST
+      //-   .demo-holder
+      //-     <div class="spot-test" style="background-color:hsl(0, 80%, 20%); height:2px"></div>
+      //-     <div class="spot-test" style="background-color:hsl(0, 90%, 50%)"></div>
+      //-     <div class="spot-test" style="background-color:hsl(0, 100%, 80%)"></div>
+      //-     <div class="spot-test" style="background-color:#666"></div>
+
+      section(data-bespoke-hash='pre-mulling-it-over')
+        h2 Graphics chat
         blockquote.single-bullet(data-linked-step=0)
           p Often, it can be more efficient to store a pre-multiplied value for the color and opacity. The pre-multiplied value is given by
           code cs = Cs x αs
           cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
         .demo-holder(data-linked-step=1)
-          table.channels
-            tr.examples
-              td.colour-def
-                code rgba(255, 0,<br>0, 0.5)
-              td
-                .example.postmul
-                  include postmul-gradient-svg
-                .example.premul
-              td.colour-def
-                code rgba(0, 0,<br>0, 0)
-            tr.title
-              td
-              td: h4 Normal
-            tr.channel-red
-              td.channel-name R
-              td.channel-graph: canvas(data-defs='post-red')
-            tr.channel-alpha
-              td.channel-name A
-              td.channel-graph: canvas(data-defs='post-alpha')
-            tr.title
-              td
-              td: h4 Pre-multiplied
-            tr.channel-red
-              td.channel-name R
-              td.channel-graph: canvas(data-defs='pre-red')
-            tr.channel-alpha
-              td.channel-name A
-              td.channel-graph: canvas(data-defs='pre-alpha')
-          p.instructions Click the graphs for extra details
+          ol.conversation
+            li.part-title.title-a GPU
+            li.part-title.title-b Browser
+            li.part-b(data-linked-step=2) Let me multiply red x alpha at the start...
+            li.part-b(data-linked-step=3) Now please draw colour at the 40% mark
+            li.part-a(data-linked-step=4) OK. What’s the <abbr title="linearly interpolated">lerp</abbr> red here?
+            li.part-b(data-linked-step=5) 0.6, but <strong>don’t bloody touch it</strong>
+            li.part-a(data-linked-step=6) Yeesh, calm down. And what’s the lerp alpha here?
+            li.part-b(data-linked-step=7) 0.6
+            li.part-a(data-linked-step=8) Cool, I will draw 0.6 red + 0.4 of the background red
+            li.part-a(data-linked-step=9) Final value is 1 red with 0.6 alpha
 
-      section.demo-blend-gradient.funky(data-bespoke-hash='blending-side-effects')
-        h2 Funky side effects
-        blockquote.single-bullet(data-linked-step=0)
-          p Thus the formula for simple alpha compositing using pre-multiplied values becomes
-          code co = cs + cb x (1 - αs)
-          p To extract the color component of a pre-multiplied value, the formula is reversed:
-          code Co = co / αo
-          cite <a href="http://dev.w3.org/fxtf/compositing-1/#generalformula">W3C: CSS Compositing and Blending Level 1</a>
-        .demo-holder(data-linked-step=1)
+      section.demo-blend-gradient(data-bespoke-hash='blending-gradients-premul', data-demo-def='red-trans-pre')
+        h2 A little less conversation <small>(a little more graphin’)</small>
+        .demo-holder
           table.channels
             tr.examples
               td.colour-def
-                code rgba(255, 0,<br>0, 1)
               td
-                .example.postmul
-                  - var useBlue = true
-                  include postmul-gradient-svg
-                .example.premul
+                canvas.example
               td.colour-def
-                code rgba(0, 0,<br>255, 0.2)
             tr.title
               td
               td: h4 Normal
             tr.channel-red
               td.channel-name R
-              td.channel-graph: canvas(data-defs='post2-red')
-            //- tr.channel-blue
-            //-   td.channel-name B
-            //-   td.channel-graph: canvas(data-defs='post3-blue')
+              td.channel-graph: canvas(data-type='r')
             tr.channel-alpha
               td.channel-name A
-              td.channel-graph: canvas(data-defs='post2-alpha')
+              td.channel-graph: canvas(data-type='a')
             tr.title
               td
               td: h4 Pre-multiplied
             tr.channel-red
               td.channel-name R
-              td.channel-graph: canvas(data-defs='pre2-red')
-            //- tr.channel-blue
-            //-   td.channel-name B
-            //-   td.channel-graph: canvas(data-defs='pre3-blue')
+              td.channel-graph: canvas(data-type='r-pre')
             tr.channel-alpha
               td.channel-name A
-              td.channel-graph: canvas(data-defs='pre2-alpha')
-          p.instructions Click the graphs for extra details
+              td.channel-graph: canvas(data-type='a-pre')
+
+      section(data-bespoke-hash='postcss-premul')
+        h2 Post vs pre
+        p More self promotion &mdash; <a href="https://github.com/gilmoreorless/postcss-gradient-transparency-fix">PostCSS gradient transparency fix</a>
+        p: img(src='images/postcss-fix.png')
+
 
       // FINALE
       
@@ -463,7 +481,7 @@ html
         .showcase-container
           .showcase-target(data-showcase-start-mode='exploded', data-showcase-timing='slow')
           //- .showcase-target.redacted(data-showcase-start-mode='3d-expanded')
-        h2 Thanks, SydCSS!
+        h2 Thanks, Decompress!
         h4 @iamnotyourbroom
         p.instructions Use number keys<br><kbd>1</kbd> to <kbd>4</kbd><br>to change the image
         
