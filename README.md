@@ -1,7 +1,10 @@
 # Gradient Circus
 
-A presentation about the inner workings of CSS gradients for [SydCSS](http://sydcss.com) (2015) and [Decompress](http://2016.decompress.com.au) (2016).
-View the slides at <http://gilmoreorless.github.io/sydcss-preso-gradient-circus>.
+A presentation about the inner workings of CSS gradients. There are a few variations, each with a different set of interactive slides viewable online:
+
+* [SydCSS](http://sydcss.com/) (2015) – [Slides](http://gilmoreorless.github.io/preso-gradient-circus/sydcss/) | [Video](https://www.youtube.com/watch?v=y_GT0mOmiE0)
+* [Decompress](http://2016.decompress.com.au/) (2016) — [Slides](http://gilmoreorless.github.io/preso-gradient-circus/decompress16/)
+
 
 ## Links and references
 
