@@ -1,6 +1,6 @@
 # Gradient Circus
 
-A presentation about the inner workings of CSS gradients for [SydCSS](http://sydcss.com).
+A presentation about the inner workings of CSS gradients for [SydCSS](http://sydcss.com) (2015) and [Decompress](http://2016.decompress.com.au) (2016).
 View the slides at <http://gilmoreorless.github.io/sydcss-preso-gradient-circus>.
 
 ## Links and references
@@ -10,10 +10,12 @@ View the slides at <http://gilmoreorless.github.io/sydcss-preso-gradient-circus>
 * [Lea Verou’s CSS3 Patterns](http://lea.verou.me/css3patterns/)
 * [Bennett Feely’s gradient gallery](http://bennettfeely.com/gradients/)
 * [A single div](http://a.singlediv.com/)
+* [My open source project showcase](https://gilmoreorless.github.io/)
 * [Gradient Inspector Chrome extension](https://chrome.google.com/webstore/detail/css-gradient-inspector/blklpjonlhpakchaahdnkcjkfmccmdik)
 * [`conic-gradient` polyfill](https://leaverou.github.io/conic-gradient/)
 * [Do you really know CSS linear-gradients?](https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf)
 * [Patrick Brossett’s `linear-gradient` tool on CodePen](http://codepen.io/captainbrosset/pen/ByqRMB)
+* [PostCSS gradient transparency fix](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)
 
 ### Specs
 
