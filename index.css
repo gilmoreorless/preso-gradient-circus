@@ -1,0 +1,49 @@
+body {
+    background: radial-gradient(farthest-corner,#f2ff38,#d9542b 110%);
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.bespoke-parent {
+    display: table-cell;
+    font-family: 'gill sans',helvetica,arial,arial,sans-serif;
+    font-size: 1.5em;
+    vertical-align: middle;
+    text-align: center;
+    width: 100vw;
+}
+.bespoke-slide {
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+h2 {
+    font-family: 'Britannic Bold','gill sans',helvetica,arial,arial,sans-serif;
+    font-size: 1.1em;
+    font-weight: 400;
+    margin: 1em 0 .1em;
+}
+p {
+    font-weight: 200;
+    margin: .5em 0 0;
+}
+h2, p {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+ul {
+    padding: 0 20px 0 30px;
+    text-align: left;
+}
+li + li {
+    margin-top: .25em;
+}
+a {
+    border-bottom: 1px solid currentColor;
+    color: currentColor;
+    font-weight: 200;
+    text-decoration: none;
+}
+a:hover {
+    border-bottom-style: dashed;
+}
